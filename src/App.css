@@ -1,0 +1,203 @@
+@font-face {
+  font-family: "bdlHeading";
+  src: url("/assets/fonts/ttf/xspace-xspace-400.ttf");
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"); */
+
+.slick-list {
+  height: 100% !important;
+  border-radius: 20px;
+}
+
+@media (max-width: 1024px) {
+  .slick-list {
+    border-radius: 0;
+  }
+}
+
+.slick-track {
+  height: 100% !important;
+  border-radius: 20px;
+}
+
+.slick-slide div {
+  height: 100% !important;
+}
+
+/* .boottoom {
+    position: relative !important;
+} */
+
+/* .boottoom::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1000%;
+    
+    
+} */
+
+/* .boottoom .slick-dots{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+} */
+
+.boottoom .slick-dots li {
+  background: #000000;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  border: 1px solid rgb(255, 255, 255);
+  opacity: 0.5;
+}
+
+.boottoom .slick-dots .slick-active {
+  opacity: 1;
+}
+
+.boottoom .slick-dots li button {
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+}
+
+.boottoom .slick-dots li:nth-child(1) {
+  top: 0%;
+  left: 0%;
+  /* transform: translate(-250%,-250%); */
+}
+
+.boottoom .slick-dots li:nth-child(2) {
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 100%);
+  background: url(/assets/b8.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(3) {
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 200%);
+  background: url(/assets/b11.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(4) {
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 300%);
+  background: url(/assets/b12.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(5) {
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 400%);
+  background: url(/assets/b13.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(6) {
+  top: 0%;
+  left: 0%;
+  transform: translate(100%, 400%);
+  background: url(/assets/b15.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(7) {
+  top: 0%;
+  left: 0%;
+  transform: translate(200%, 400%);
+  background: url(/assets/b16.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(8) {
+  top: 0%;
+  left: 0%;
+  transform: translate(300%, 400%);
+  background: url(/assets/b17.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(9) {
+  top: 0%;
+  left: 0%;
+  transform: translate(400%, 400%);
+  background: url(/assets/b18.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(10) {
+  top: 0%;
+  left: 0%;
+  transform: translate(400%, 300%);
+  background: url(/assets/b19.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(11) {
+  top: 0%;
+  left: 0%;
+  transform: translate(400%, 200%);
+  background: url(/assets/b20.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(12) {
+  top: 0%;
+  left: 0%;
+  transform: translate(400%, 100%);
+  background: url(/assets/b21.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(13) {
+  top: 0%;
+  left: 0%;
+  transform: translate(400%, 0%);
+  background: url(/assets/b22.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(14) {
+  top: 0%;
+  left: 0%;
+  transform: translate(300%, 0%);
+  background: url(/assets/b23.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(15) {
+  top: 0%;
+  left: 0%;
+  transform: translate(200%, 0%);
+  background: url(/assets/b24.png) no-repeat center / cover;
+}
+
+.boottoom .slick-dots li:nth-child(16) {
+  top: 0%;
+  left: 0%;
+  transform: translate(100%, 0%);
+  background: url(/assets/b25.png) no-repeat center / cover;
+}
+
+.productOverlay {
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+.Contactwith {
+  font-family: "Dancing Script", cursive;
+}
+
+.textShadow {
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.71);
+}
+/* 
+.ytp-chrome-top.ytp-show-cards-title{
+    display: none !important;
+}
+
+.ytp-watermark{
+    display: none !important;
+} */

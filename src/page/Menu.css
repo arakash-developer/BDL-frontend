@@ -1,0 +1,4 @@
+.menuDesignUl a{
+    clip-path: polygon(0 0, 100% 35%, 100% 65%, 0% 100%);
+
+}
