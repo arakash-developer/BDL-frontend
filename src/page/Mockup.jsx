@@ -15,7 +15,7 @@ const Mockup = () => {
   });
   const [shuffledContent, setShuffledContent] = useState([]);
   const [recentWorks, setRecentWorks] = useState([]); // State for recent works
-  const [mockupImages, setMockupImages] = useState([]); // State for mockup images
+  // const [mockupImages, setMockupImages] = useState([]); 
   const [singleMockupZoneImages, setSingleMockupZoneImages] = useState([]);
 
   // Fetch data for recent works from the API
@@ -41,35 +41,35 @@ const Mockup = () => {
   // Fetch data for mockup images from the API
   useEffect(() => {
     // Function to fetch mockup data from the API
-    const fetchMockupData = async () => {
-      try {
-        const response = await fetch(
-          "https://code.bdluminaries.com/api/v1/mockup-zones"
-        );
-        const data = await response.json();
+    // const fetchMockupData = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       "https://code.bdluminaries.com/api/v1/mockup-zones"
+    //     );
+    //     const data = await response.json();
 
-        // Process the data to extract images and videos
-        const combinedContent = data
-          .sort((a, b) => a.prioroty - b.prioroty)
-          .flatMap((zone) => {
-            const imagesWithType = zone.images.map((img) => ({
-              type: "image",
-              src: `${img}`,
-            }));
-            const videosWithType = zone.videos.map((vid) => ({
-              type: "video",
-              video: `${vid.video}`,
-              thumbnail: `${vid.thumbnail}`,
-            }));
-            return [...imagesWithType, ...videosWithType];
-          });
+    //     // Process the data to extract images and videos
+    //     const combinedContent = data
+    //       .sort((a, b) => a.prioroty - b.prioroty)
+    //       .flatMap((zone) => {
+    //         const imagesWithType = zone.images.map((img) => ({
+    //           type: "image",
+    //           src: `${img}`,
+    //         }));
+    //         const videosWithType = zone.videos.map((vid) => ({
+    //           type: "video",
+    //           video: `${vid.video}`,
+    //           thumbnail: `${vid.thumbnail}`,
+    //         }));
+    //         return [...imagesWithType, ...videosWithType];
+    //       });
 
-        setMockupImages(combinedContent);
-      } catch (error) {
-        console.error("Error fetching mockup data:", error);
-      }
-    };
-    fetchMockupData();
+    //     setMockupImages(combinedContent);
+    //   } catch (error) {
+    //     console.error("Error fetching mockup data:", error);
+    //   }
+    // };
+    // fetchMockupData();
 
     const fetchSingleMockupData = async () => {
       try {
@@ -107,14 +107,14 @@ const Mockup = () => {
   useEffect(() => {
     const shuffled = [
       ...(singleMockupZoneImages || []),
-      ...mockupImages.sort(() => 0.5 - Math.random()),
+      // ...mockupImages.sort(() => 0.5 - Math.random()),
     ];
     setShuffledContent(shuffled);
     setSelectedContent({
       type: searchParams.get("type") || "image",
       src: searchParams.get("src"),
     });
-  }, [mockupImages, singleMockupZoneImages]);
+  }, [singleMockupZoneImages]);
 
   const displayContent = (type, source) => {
     setSelectedContent({ type, src: source });
