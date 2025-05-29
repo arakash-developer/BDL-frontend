@@ -55,7 +55,7 @@ const MockupZones = () => {
           <div key={index} className="h-full">
             <img
               className="image h-full w-full object-cover"
-              src={`https://code.bdluminaries.com/${zone.images[0]}`}
+              src={`https://xyz.bdluminaries.com/${zone.images[0]}`}
               alt={`Zone ${zone.name}`}
             />
           </div>
