@@ -80,6 +80,7 @@ import Test from "./page/Test";
 import BDLSCAN from "/BDLWEB.png";
 
 const App = () => {
+  
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const [review, setReview] = useState(null);
 

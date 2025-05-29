@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Preloader from "../components/Preloader";
 
 const Mockup = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,16 +16,14 @@ const Mockup = () => {
   });
   const [shuffledContent, setShuffledContent] = useState([]);
   const [recentWorks, setRecentWorks] = useState([]); // State for recent works
-  // const [mockupImages, setMockupImages] = useState([]); 
+  // const [mockupImages, setMockupImages] = useState([]);
   const [singleMockupZoneImages, setSingleMockupZoneImages] = useState([]);
 
   // Fetch data for recent works from the API
   useEffect(() => {
     const fetchRecentWorks = async () => {
       try {
-        const response = await fetch(
-          "https://code.bdluminaries.com/api/v1/recent-works"
-        );
+        const response = await fetch(`${serverUrl}/api/v1/recent-works`);
         const data = await response.json();
 
         // Process the data to extract only image data
@@ -73,9 +72,7 @@ const Mockup = () => {
 
     const fetchSingleMockupData = async () => {
       try {
-        const response = await fetch(
-          `https://code.bdluminaries.com/api/v1/mockup-zones/${id}`
-        );
+        const response = await fetch(`${serverUrl}/api/v1/mockup-zones/${id}`);
         const data = await response.json();
         // Set selected content to the first image in the mockup
         if (!searchParams.get("src")) {
@@ -141,7 +138,7 @@ const Mockup = () => {
               className="w-full h-full object-cover"
               controls
               autoPlay
-              src={`https://code.bdluminaries.com/` + searchParams.get("src")}
+              src={serverUrl + searchParams.get("src")}
             />
           )}
           {searchParams.get("type") === "image" && (
@@ -149,7 +146,7 @@ const Mockup = () => {
               width="100%"
               height="100%"
               className="w-full h-full object-cover"
-              src={`https://code.bdluminaries.com/` + searchParams.get("src")}
+              src={`${serverUrl}/` + searchParams.get("src")}
               alt="Image missing"
             />
           )}
@@ -169,7 +166,7 @@ const Mockup = () => {
                 className="shadow-md rounded"
               >
                 <img
-                  src={`https://code.bdluminaries.com/${work.images[0]}`}
+                  src={`${serverUrl}/${work.images[0]}`}
                   className="w-full h-14 object-cover rounded"
                   alt="Recent work"
                 />
@@ -198,7 +195,7 @@ const Mockup = () => {
                 }}
               >
                 <img
-                  src={`https://code.bdluminaries.com/${
+                  src={`${serverUrl}/${
                     item.type === "video" ? item.thumbnail : item.src
                   } `} // Updated to use src for images
                   className="w-full h-14 object-cover rounded"
