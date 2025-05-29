@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import axios from "../axios";
 
 const MockupZones = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL; 
   let navigate = useNavigate();
 
   // Slider settings
@@ -55,7 +56,7 @@ const MockupZones = () => {
           <div key={index} className="h-full">
             <img
               className="image h-full w-full object-cover"
-              src={`https://xyz.bdluminaries.com/${zone.images[0]}`}
+              src={`${serverUrl}/${zone.images[0]}`}
               alt={`Zone ${zone.name}`}
             />
           </div>
