@@ -138,7 +138,7 @@ const Mockup = () => {
               className="w-full h-full object-cover"
               controls
               autoPlay
-              src={serverUrl + searchParams.get("src")}
+              src={`${serverUrl}/` + searchParams.get("src")}
             />
           )}
           {searchParams.get("type") === "image" && (
