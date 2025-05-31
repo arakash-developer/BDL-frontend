@@ -119,18 +119,19 @@ const RecentWorks = () => {
         </p>
       </div>
       <div
-        onClick={() => handleImageClick(works[15]?.images[0], works[15]?._id)}
+        // onClick={() => handleImageClick(works[15]?.images[0], works[15]?._id)}
         className={`sixteen bg-rose-400 relative ${
           activeIndex >= 16 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
-        <img
+        {/* <img
           className="h-full w-full object-cover"
           src={`${serverUrl}/${works[15]?.images[0]}`}
           alt=""
-        />
+        /> */}
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
-          {works[15]?.title}
+          {/* {works[15]?.title} */}
+          15 To All
         </p>
       </div>
       <div
