@@ -23,6 +23,7 @@ const RecentWorks = () => {
   const [works, setWorks] = useState([]);
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
   const [allCount, setAllCount] = useState(0);
+ const [recentBanner, setRecentBanner] = useState([]); 
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -43,9 +44,18 @@ const RecentWorks = () => {
       console.error("Error fetching home:", error);
     }
   };
+  const fetchRecentBanner = async () => {
+    try {
+      let res = await axios.get("/recentWorkBanner");
+      setRecentBanner(res.data);
+    } catch (error) {
+      console.error("Error fetching recent banner:", error);
+    }
+  };
   useEffect(() => {
     fetchRecentWorks();
     fetchHome();
+    fetchRecentBanner();
   }, []);
 
   // Function to handle clicking on an image
@@ -139,8 +149,7 @@ const RecentWorks = () => {
           alt=""
         /> */}
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
-          {/* {works[15]?.title} */}
-          1 To {allCount.recentWorkCount}
+          {/* {works[15]?.title} */}1 To {allCount.recentWorkCount}
         </p>
       </div>
       <div
