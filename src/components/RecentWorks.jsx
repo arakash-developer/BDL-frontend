@@ -23,7 +23,7 @@ const RecentWorks = () => {
   const [works, setWorks] = useState([]);
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
   const [allCount, setAllCount] = useState(0);
- const [recentBanner, setRecentBanner] = useState([]); 
+  const [recentBanner, setRecentBanner] = useState([]);
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -48,6 +48,7 @@ const RecentWorks = () => {
     try {
       let res = await axios.get("/recentWorkBanner");
       setRecentBanner(res.data);
+      console.log("Recent Banner Data:", res.data);
     } catch (error) {
       console.error("Error fetching recent banner:", error);
     }
@@ -105,7 +106,18 @@ const RecentWorks = () => {
     >
       <div className="absolute top-0 left-0 w-full h-full z-[-1]">
         <Slider className="h-full w-full" {...settings}>
-          {works
+          {recentBanner
+            .sort((a, b) => a.priority - b.priority)
+            .map((work) => (
+              <div key={`${work._id}`} className="h-full">
+                <img
+                  className="image h-full w-full object-cover"
+                  src={`${serverUrl}/${work.image}`}
+                  alt="Recent Work"
+                />
+              </div>
+            ))}
+          {/* {works
             .sort((a, b) => a.prioroty - b.prioroty)
             .map((work) =>
               work.images
@@ -119,7 +131,7 @@ const RecentWorks = () => {
                     />
                   </div>
                 ))
-            )}
+            )} */}
         </Slider>
       </div>
       <div
