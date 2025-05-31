@@ -18,7 +18,7 @@ const RecentWorks = () => {
     autoplay: true,
     autoplaySpeed: 4000,
   };
-
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
   const [works, setWorks] = useState([]);
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
@@ -95,7 +95,7 @@ const RecentWorks = () => {
                   <div key={`${work._id}-${index}`} className="h-full">
                     <img
                       className="image h-full w-full object-cover"
-                      src={`https://code.bdluminaries.com/${image}`}
+                      src={`${serverUrl}/${image}`}
                       alt="Recent Work"
                     />
                   </div>
@@ -112,7 +112,7 @@ const RecentWorks = () => {
         <img
           className="h-full w-full object-cover"
           // src={works.image[0]}
-          src={`https://code.bdluminaries.com/${works[0]?.images[0]}`}
+          src={`${serverUrl}/${works[0]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
@@ -127,7 +127,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[1]?.images[0]}`}
+          src={`${serverUrl}/${works[1]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
@@ -142,7 +142,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[2]?.images[0]}`}
+          src={`${serverUrl}/${works[2]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
@@ -157,7 +157,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[3]?.images[0]}`}
+          src={`${serverUrl}/${works[3]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -172,7 +172,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[4]?.images[0]}`}
+          src={`${serverUrl}/${works[4]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -187,7 +187,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[5]?.images[0]}`}
+          src={`${serverUrl}/${works[5]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -207,7 +207,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[6]?.images[0]}`}
+          src={`${serverUrl}/${works[6]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -222,7 +222,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[7]?.images[0]}`}
+          src={`${serverUrl}/${works[7]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -238,7 +238,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[8]?.images[0]}`}
+          src={`${serverUrl}/${works[8]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -254,7 +254,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[9]?.images[0]}`}
+          src={`${serverUrl}/${works[9]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -270,7 +270,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[10]?.images[0]}`}
+          src={`${serverUrl}/${works[10]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -285,7 +285,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[11]?.images[0]}`}
+          src={`${serverUrl}/${works[11]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -301,7 +301,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[12]?.images[0]}`}
+          src={`${serverUrl}/${works[12]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -316,7 +316,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[13]?.images[0]}`}
+          src={`${serverUrl}/${works[13]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -331,7 +331,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[14]?.images[0]}`}
+          src={`${serverUrl}/${works[14]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
@@ -346,7 +346,7 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          src={`https://code.bdluminaries.com/${works[15]?.images[0]}`}
+          src={`${serverUrl}/${works[15]?.images[0]}`}
           alt=""
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
