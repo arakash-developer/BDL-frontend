@@ -98,7 +98,9 @@ const RecentWorks = () => {
     setShowButton(false);
     setActiveIndex((prev) => (prev < 16 ? prev + 1 : 17));
   };
-
+  let handlerRecentGoto = () => {
+    console.log("Recent Goto Clicked");
+  };
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
@@ -109,7 +111,7 @@ const RecentWorks = () => {
           {recentBanner
             .sort((a, b) => a.priority - b.priority)
             .map((work) => (
-              <div key={`${work._id}`} className="h-full">
+              <div onClick={() => handlerRecentGoto()} key={`${work._id}`} className="h-full">
                 <img
                   className="image h-full w-full object-cover"
                   src={`${serverUrl}/${work.image}`}
@@ -225,7 +227,7 @@ const RecentWorks = () => {
         </p>
       </div>
       <div
-        className={`seventeen bg-violet-400 col-span-3 row-span-3 ${
+        className={`seventeen pointer-events-none bg-violet-400 col-span-3 row-span-3 ${
           activeIndex === 17 ? "opacity-0" : "opacity-0"
         } transition-opacity duration-500`}
       ></div>
