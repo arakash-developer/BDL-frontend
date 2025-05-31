@@ -214,7 +214,7 @@ const RecentWorks = () => {
       {isPopupVisible && (
         <div
           ref={popupRef}
-          className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#8BC24A] p-4"
+          className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#DCFCE7] p-4"
         >
           <div className="relative w-full h-full">
             {/* Close button */}
