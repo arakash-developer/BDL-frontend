@@ -28,7 +28,7 @@ const RecentWorks = () => {
     const fetchRecentWorks = async () => {
       try {
         let res = await axios.get("/recent-works");
-        setWorks(res.data);
+        setWorks(res.data.reverse()); // Reverse the order to show the latest works first
         if (res.data.length > 0) {
           setSelectedRecentImage(res.data[0].images[0]); // Set the first image as selected
         }
@@ -111,7 +111,6 @@ const RecentWorks = () => {
       >
         <img
           className="h-full w-full object-cover"
-          // src={works.image[0]}
           src={`${serverUrl}/${works[0]?.images[0]}`}
           alt=""
         />
@@ -120,9 +119,69 @@ const RecentWorks = () => {
         </p>
       </div>
       <div
-        onClick={() => handleImageClick(works[1]?.images[0], works[1]?._id)}
+        onClick={() => handleImageClick(works[15]?.images[0], works[15]?._id)}
         className={`sixteen bg-rose-400 relative ${
           activeIndex >= 16 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[15]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+          {works[15]?.title}
+        </p>
+      </div>
+      <div
+        onClick={() => handleImageClick(works[14]?.images[0], works[14]?._id)}
+        className={`fifteen bg-fuchsia-400 relative ${
+          activeIndex >= 15 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[14]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+          {works[14]?.title}
+        </p>
+      </div>
+      <div
+        onClick={() => handleImageClick(works[13]?.images[0], works[13]?._id)}
+        className={`fourteen bg-emerald-400 relative cursor-pointer ${
+          activeIndex >= 14 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[13]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+          {works[13]?.title}
+        </p>
+      </div>
+      <div
+        onClick={() => handleImageClick(works[12]?.images[0], works[12]?._id)}
+        className={`thirteen bg-amber-400 relative cursor-pointer ${
+          activeIndex >= 13 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[12]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+          {works[12]?.title}
+        </p>
+      </div>
+      <div
+        onClick={() => handleImageClick(works[1]?.images[0], works[1]?._id)}
+        className={`two bg-blue-400 relative cursor-pointer ${
+          activeIndex >= 2 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -130,14 +189,34 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[1]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
           {works[1]?.title}
         </p>
       </div>
       <div
+        className={`seventeen bg-violet-400 col-span-3 row-span-3 ${
+          activeIndex === 17 ? "opacity-0" : "opacity-0"
+        } transition-opacity duration-500`}
+      ></div>
+      <div
+        onClick={() => handleImageClick(works[11]?.images[0], works[11]?._id)}
+        className={`twelve bg-lime-400 relative cursor-pointer ${
+          activeIndex >= 12 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[11]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+          {works[11]?.title}
+        </p>
+      </div>
+      <div
         onClick={() => handleImageClick(works[2]?.images[0], works[2]?._id)}
-        className={`fifteen bg-fuchsia-400 relative ${
-          activeIndex >= 15 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`three bg-green-400 relative cursor-pointer ${
+          activeIndex >= 3 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -145,14 +224,31 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[2]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
           {works[2]?.title}
         </p>
       </div>
+
+      <div
+        onClick={() => handleImageClick(works[10]?.images[0], works[10]?._id)}
+        className={`eleven bg-cyan-400 relative cursor-pointer ${
+          activeIndex >= 11 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[10]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+          {works[10]?.title}-
+        </p>
+      </div>
+
       <div
         onClick={() => handleImageClick(works[3]?.images[0], works[3]?._id)}
-        className={`fourteen bg-emerald-400 relative cursor-pointer ${
-          activeIndex >= 14 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`four bg-yellow-400 relative cursor-pointer ${
+          activeIndex >= 4 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -164,10 +260,26 @@ const RecentWorks = () => {
           {works[3]?.title}
         </p>
       </div>
+
+      <div
+        onClick={() => handleImageClick(works[9]?.images[0], works[9]?._id)}
+        className={`ten bg-gray-400 relative cursor-pointer ${
+          activeIndex >= 10 ? "opacity-100 visible" : "opacity-0 invisible"
+        } transition-opacity duration-500`}
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={`${serverUrl}/${works[9]?.images[0]}`}
+          alt=""
+        />
+        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+          {works[9]?.title}
+        </p>
+      </div>
       <div
         onClick={() => handleImageClick(works[4]?.images[0], works[4]?._id)}
-        className={`thirteen bg-amber-400 relative cursor-pointer ${
-          activeIndex >= 13 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`five bg-purple-400 relative cursor-pointer ${
+          activeIndex >= 5 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -179,10 +291,11 @@ const RecentWorks = () => {
           {works[4]?.title}
         </p>
       </div>
+
       <div
         onClick={() => handleImageClick(works[5]?.images[0], works[5]?._id)}
-        className={`two bg-blue-400 relative cursor-pointer ${
-          activeIndex >= 2 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`six bg-pink-400 relative cursor-pointer ${
+          activeIndex >= 6 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -195,14 +308,9 @@ const RecentWorks = () => {
         </p>
       </div>
       <div
-        className={`seventeen bg-violet-400 col-span-3 row-span-3 ${
-          activeIndex === 17 ? "opacity-0" : "opacity-0"
-        } transition-opacity duration-500`}
-      ></div>
-      <div
         onClick={() => handleImageClick(works[6]?.images[0], works[6]?._id)}
-        className={`twelve bg-lime-400 relative cursor-pointer ${
-          activeIndex >= 12 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`seven bg-indigo-400 relative cursor-pointer ${
+          activeIndex >= 7 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -216,8 +324,8 @@ const RecentWorks = () => {
       </div>
       <div
         onClick={() => handleImageClick(works[7]?.images[0], works[7]?._id)}
-        className={`three bg-green-400 relative cursor-pointer ${
-          activeIndex >= 3 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`eight bg-violet-400 relative cursor-pointer ${
+          activeIndex >= 8 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -229,11 +337,10 @@ const RecentWorks = () => {
           {works[7]?.title}
         </p>
       </div>
-
       <div
         onClick={() => handleImageClick(works[8]?.images[0], works[8]?._id)}
-        className={`eleven bg-cyan-400 relative cursor-pointer ${
-          activeIndex >= 11 ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`nine bg-orange-400 relative cursor-pointer ${
+          activeIndex >= 9 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
       >
         <img
@@ -243,114 +350,6 @@ const RecentWorks = () => {
         />
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
           {works[8]?.title}
-        </p>
-      </div>
-
-      <div
-        onClick={() => handleImageClick(works[9]?.images[0], works[9]?._id)}
-        className={`four bg-yellow-400 relative cursor-pointer ${
-          activeIndex >= 4 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[9]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[9]?.title}
-        </p>
-      </div>
-
-      <div
-        onClick={() => handleImageClick(works[10]?.images[0], works[10]?._id)}
-        className={`ten bg-gray-400 relative cursor-pointer ${
-          activeIndex >= 10 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[10]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[10]?.title}
-        </p>
-      </div>
-      <div
-        onClick={() => handleImageClick(works[11]?.images[0], works[11]?._id)}
-        className={`five bg-purple-400 relative cursor-pointer ${
-          activeIndex >= 5 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[11]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[11]?.title}
-        </p>
-      </div>
-
-      <div
-        onClick={() => handleImageClick(works[12]?.images[0], works[12]?._id)}
-        className={`six bg-pink-400 relative cursor-pointer ${
-          activeIndex >= 6 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[12]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[12]?.title}
-        </p>
-      </div>
-      <div
-        onClick={() => handleImageClick(works[13]?.images[0], works[13]?._id)}
-        className={`seven bg-indigo-400 relative cursor-pointer ${
-          activeIndex >= 7 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[13]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[13]?.title}
-        </p>
-      </div>
-      <div
-        onClick={() => handleImageClick(works[14]?.images[0], works[14]?._id)}
-        className={`eight bg-violet-400 relative cursor-pointer ${
-          activeIndex >= 8 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[14]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[14]?.title}
-        </p>
-      </div>
-      <div
-        onClick={() => handleImageClick(works[15]?.images[0], works[15]?._id)}
-        className={`nine bg-orange-400 relative cursor-pointer ${
-          activeIndex >= 9 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[15]?.images[0]}`}
-          alt=""
-        />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[15]?.title}
         </p>
       </div>
       {showButton && (
