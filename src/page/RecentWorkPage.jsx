@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import Preloader from "../components/Preloader";
 
 const RecentWork = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
   const [shuffledContent, setShuffledContent] = useState([]);
@@ -38,9 +39,7 @@ const RecentWork = () => {
   useEffect(() => {
     const fetchRecentWork = async () => {
       try {
-        const response = await axios.get(
-          "https://code.bdluminaries.com/api/v1/recent-works"
-        );
+        const response = await axios.get(`${serverUrl}/api/v1/recent-works`);
         const data = response?.data;
 
         const formattedContent = data?.flatMap((work) => {
@@ -105,7 +104,7 @@ const RecentWork = () => {
     if (recentWork.length > 0) {
       const shuffled = [
         ...(newSeletedContent || []),
-        ...recentWork.sort(() => 0.5 - Math.random()),
+        // ...recentWork.sort(() => 0.5 - Math.random()),
       ];
       setShuffledContent(shuffled);
     }
@@ -155,7 +154,7 @@ const RecentWork = () => {
               controls
               autoPlay
               muted
-              src={`https://code.bdluminaries.com/${
+              src={`${serverUrl}/${
                 searchParams.get("src") || selectedContent.src
               }`}
             />
@@ -165,7 +164,7 @@ const RecentWork = () => {
               height="100%"
               width="100%"
               className="!w-full h-full object-cover"
-              src={`https://code.bdluminaries.com/${
+              src={`${serverUrl}/${
                 searchParams.get("src") || selectedContent.src
               }`}
               alt="Selected"
@@ -190,14 +189,14 @@ const RecentWork = () => {
                 >
                   {item?.type === "image" && item?.image && (
                     <img
-                      src={`https://code.bdluminaries.com/${item?.image}`}
+                      src={`${serverUrl}/${item?.image}`}
                       className="w-full h-14 object-cover rounded"
                       alt="Image"
                     />
                   )}
                   {item?.type === "video" && item?.thumbnail && (
                     <img
-                      src={`https://code.bdluminaries.com/${item?.thumbnail}`}
+                      src={`${serverUrl}/${item?.thumbnail}`}
                       className="w-full h-14 object-cover rounded"
                       alt="Video"
                     />
@@ -218,7 +217,7 @@ const RecentWork = () => {
                 className="shadow-md rounded cursor-pointer"
               >
                 <img
-                  src={`https://code.bdluminaries.com/${mockupItem.images[0]}`}
+                  src={`${serverUrl}/${mockupItem.images[0]}`}
                   className="w-full h-14 object-cover rounded"
                   alt="Mockup"
                 />
