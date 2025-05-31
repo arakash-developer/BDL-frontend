@@ -22,21 +22,30 @@ const RecentWorks = () => {
   let navigate = useNavigate();
   const [works, setWorks] = useState([]);
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
-
+  const [allCount, setAllCount] = useState(0);
   // Fetch recent works from API
-  useEffect(() => {
-    const fetchRecentWorks = async () => {
-      try {
-        let res = await axios.get("/recent-works");
-        setWorks(res.data.reverse()); // Reverse the order to show the latest works first
-        if (res.data.length > 0) {
-          setSelectedRecentImage(res.data[0].images[0]); // Set the first image as selected
-        }
-      } catch (error) {
-        console.error("Error fetching recent works:", error);
+  const fetchRecentWorks = async () => {
+    try {
+      let res = await axios.get("/recent-works");
+      setWorks(res.data.reverse()); // Reverse the order to show the latest works first
+      if (res.data.length > 0) {
+        setSelectedRecentImage(res.data[0].images[0]); // Set the first image as selected
       }
-    };
+    } catch (error) {
+      console.error("Error fetching recent works:", error);
+    }
+  };
+  const fetchHome = async () => {
+    try {
+      let res = await axios.get("/home");
+      setAllCount(res.data);
+    } catch (error) {
+      console.error("Error fetching home:", error);
+    }
+  };
+  useEffect(() => {
     fetchRecentWorks();
+    fetchHome();
   }, []);
 
   // Function to handle clicking on an image
@@ -131,7 +140,7 @@ const RecentWorks = () => {
         /> */}
         <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
           {/* {works[15]?.title} */}
-          15 To All
+          1 To {allCount.recentWorkCount}
         </p>
       </div>
       <div
