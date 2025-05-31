@@ -43,7 +43,7 @@ const Mockup = () => {
     // const fetchMockupData = async () => {
     //   try {
     //     const response = await fetch(
-    //       "https://code.bdluminaries.com/api/v1/mockup-zones"
+    //       `${serverUrl}/api/v1/mockup-zones`
     //     );
     //     const data = await response.json();
 

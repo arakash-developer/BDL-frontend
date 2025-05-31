@@ -14,6 +14,7 @@ import slogan from "/assets/slogan.png";
 import Navbar from "../components/Navbar";
 
 const Blog = () => {
+    let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
   const [isItemVisible, setIsItemVisible] = useState(false);
   const [blogs, setBlogs] = useState([]); // State for storing blog data
@@ -26,7 +27,7 @@ const Blog = () => {
 
   // Fetch blog data from API
   useEffect(() => {
-    fetch("https://code.bdluminaries.com/api/v1/academys")
+    fetch(`${serverUrl}/api/v1/academys`)
       .then((response) => response.json())
       .then((data) => {
         const filteredData = data
@@ -95,7 +96,7 @@ const Blog = () => {
                   className="bg-white p-4 rounded-lg shadow-lg w-full max-w-md mb-6"
                 >
                   <img
-                    src={`https://code.bdluminaries.com/${blog.image}`}
+                    src={`${serverUrl}/${blog.image}`}
                     alt={blog.title}
                     className="rounded-lg mb-4 h-60 w-full object-cover"
                   />

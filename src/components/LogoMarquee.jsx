@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Marquee from "react-marquee-slider";
 import axios from "../axios";
 
 const LogoMarquee = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [logos, setLogos] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await axios.get("/profiles");
-        
+
         if (res.data && res.data.length > 0) {
           const logoData = res.data[0].portfolio.map((image) => ({
-            src: `https://code.bdluminaries.com/${image}`,
+            src: `${serverUrl}/${image}`,
             alt: "Portfolio Logo",
           }));
           setLogos(logoData);
@@ -23,11 +24,9 @@ const LogoMarquee = () => {
         console.error("Error fetching the group data:", error);
       }
     };
-  
-    getData();
-  }, [logos]);  // Adding logos as a dependency
-  
 
+    getData();
+  }, [logos]); // Adding logos as a dependency
 
   return (
     <div className="marquee-container">
@@ -41,7 +40,6 @@ const LogoMarquee = () => {
           />
         ))}
       </Marquee>
-
     </div>
   );
 };

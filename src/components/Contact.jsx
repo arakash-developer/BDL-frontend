@@ -1,10 +1,11 @@
 import { Image } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const ContactForm = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -67,7 +68,7 @@ const ContactForm = () => {
       };
       // Sending the POST request to the API
       const response = await axios.post(
-        "https://code.bdluminaries.com/api/v1/contacts",
+        `${serverUrl}/api/v1/contacts`,
         data,
         config
       );
@@ -104,7 +105,9 @@ const ContactForm = () => {
           <span className="Contactwith absolute text-lg left-0 top-7 -rotate-45 text-[#F15B26]">
             with
           </span>
-          <span className="font-bdlHeading font-bold text-sm tracking-tight text-[#8AC249]">bdLUMINARIES</span>
+          <span className="font-bdlHeading font-bold text-sm tracking-tight text-[#8AC249]">
+            bdLUMINARIES
+          </span>
         </div>
 
         {success && (

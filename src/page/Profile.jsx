@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
@@ -16,6 +16,7 @@ import Navbar from "../components/Navbar";
 import Progress from "../components/Progress";
 
 const Profile = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
   const [isItemVisible, setIsItemVisible] = useState(false);
   const [profileData, setProfileData] = useState([]);
@@ -50,7 +51,7 @@ const Profile = () => {
               controls
               autoPlay
               loop
-              src={`https://code.bdluminaries.com/${item.video}`}
+              src={`${serverUrl}/${item.video}`}
             />
           ))}
         </div>
@@ -75,10 +76,11 @@ const Profile = () => {
             </div>
           </div>
 
-          {profileData.map((item) => (
+          {profileData.map((item,i) => (
             <img
+            key={i}
               className="h-[100%] object-cover rounded-b-2xl col-span-3"
-              src={`https://code.bdluminaries.com/${item.image}`}
+              src={`${serverUrl}/${item.image}`}
               alt=""
             />
           ))}

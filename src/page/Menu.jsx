@@ -12,6 +12,7 @@ import Consultancy from "../components/Consultancy";
 import "./Menu.css";
 
 const Menu = () => {
+    let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,7 +40,7 @@ const Menu = () => {
   const fetchActiveImages = async () => {
     try {
       let res = await axios.get(
-        "https://code.bdluminaries.com/api/v1/greeting"
+      `${serverUrl}/api/v1/greeting`
       );
       setActiveImages(res.data.filter((item) => item.status === "active"));
     } catch (error) {
@@ -210,7 +211,7 @@ const Menu = () => {
                 <img
                   key={index}
                   className="h-7"
-                  src={`https://code.bdluminaries.com/${image.image}`}
+                  src={`${serverUrl}/${image.image}`}
                   alt={image.title}
                 />
               ))}

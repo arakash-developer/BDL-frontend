@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { AiOutlineProduct } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import slogan from "/assets/slogan.png";
 
 const Navbar = () => {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [greetings, setGreetings] = useState([]);
 
   // Fetch greeting data from the API
   useEffect(() => {
-    fetch("https://code.bdluminaries.com/api/v1/greeting")
+    fetch(`${serverUrl}/api/v1/greeting`)
       .then((response) => response.json())
       .then((data) => setGreetings(data))
       .catch((error) => console.error("Error fetching greetings:", error));
@@ -44,7 +45,7 @@ const Navbar = () => {
                 <img
                   key={greeting._id}
                   className="h-7"
-                  src={`https://code.bdluminaries.com/${greeting.image}`}
+                  src={`${serverUrl}/${greeting.image}`}
                   alt={greeting.title}
                 />
               ))
