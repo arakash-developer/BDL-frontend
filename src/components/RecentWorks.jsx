@@ -35,7 +35,7 @@ const RecentWorks = () => {
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
-      let res = await axios.get("/recent-works");
+      let res = await axios.get("recent-works/prioritized");
       setWorks(res.data.reverse()); // Reverse the order to show the latest works first
       if (res.data.length > 0) {
         setSelectedRecentImage(res.data[0].images[0]); // Set the first image as selected
