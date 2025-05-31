@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "../axios";
@@ -19,6 +19,8 @@ const RecentWorks = () => {
     autoplaySpeed: 4000,
   };
   let serverUrl = import.meta.env.VITE_SERVER_URL;
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const popupRef = useRef(null);
   let navigate = useNavigate();
   const [works, setWorks] = useState([]);
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
@@ -100,19 +102,52 @@ const RecentWorks = () => {
   };
   let handlerRecentGoto = (recent) => {
     console.log("Recent Goto Clicked");
-      navigate(`/work/${recent}`);
+    navigate(`/work/${recent}`);
   };
+
+  // Close popup if click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setPopupVisible(false);
+      }
+    }
+
+    if (isPopupVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isPopupVisible]);
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
       className={`h-[48.5%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}
     >
+      {isPopupVisible && (
+        <div
+          ref={popupRef}
+          className="absolute top-0 left-0 w-full h-full z-[999999] bg-red-500"
+        >
+          {" "}
+          mmmmm
+          <button onClick={() => setPopupVisible(false)}>Close</button>
+        </div>
+      )}
       <div className="absolute top-0 left-0 w-full h-full z-[-1]">
         <Slider className="h-full w-full" {...settings}>
           {recentBanner
             .sort((a, b) => a.priority - b.priority)
             .map((work) => (
-              <div onClick={() => handlerRecentGoto(work.recentWork)} key={`${work._id}`} className="h-full">
+              <div
+                onClick={() => handlerRecentGoto(work.recentWork)}
+                key={`${work._id}`}
+                className="h-full"
+              >
                 <img
                   className="image h-full w-full object-cover"
                   src={`${serverUrl}/${work.image}`}
@@ -154,6 +189,7 @@ const RecentWorks = () => {
       </div>
       <div
         // onClick={() => handleImageClick(works[15]?.images[0], works[15]?._id)}
+        onClick={() => setPopupVisible(true)}
         className={`sixteen bg-rose-400 relative ${
           activeIndex >= 16 ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-opacity duration-500`}
