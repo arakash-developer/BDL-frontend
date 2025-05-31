@@ -98,8 +98,9 @@ const RecentWorks = () => {
     setShowButton(false);
     setActiveIndex((prev) => (prev < 16 ? prev + 1 : 17));
   };
-  let handlerRecentGoto = () => {
+  let handlerRecentGoto = (recent) => {
     console.log("Recent Goto Clicked");
+      navigate(`/work/${recent}`);
   };
   return (
     <div
@@ -111,7 +112,7 @@ const RecentWorks = () => {
           {recentBanner
             .sort((a, b) => a.priority - b.priority)
             .map((work) => (
-              <div onClick={() => handlerRecentGoto()} key={`${work._id}`} className="h-full">
+              <div onClick={() => handlerRecentGoto(work.recentWork)} key={`${work._id}`} className="h-full">
                 <img
                   className="image h-full w-full object-cover"
                   src={`${serverUrl}/${work.image}`}
