@@ -27,9 +27,11 @@ const RecentWorks = () => {
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
   const [allCount, setAllCount] = useState(0);
   const [recentBanner, setRecentBanner] = useState([]);
-  let [recentlimit, setRecentLimit] = useState([]);
+  const [recentLimit, setRecentLimit] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   let limit = 12;
-  let page = 1;
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -50,17 +52,34 @@ const RecentWorks = () => {
       console.error("Error fetching home:", error);
     }
   };
-  const recentLimitfn = async () => {
+  const recentLimitfn = async (pageNumber = 1) => {
+    if (loadingMore) return; // avoid multiple calls
+
+    setLoadingMore(true);
     try {
       let res = await axios.get(
-        `/recent-works/recentlimitwork?limit=${limit}&page=${page}`
+        `/recent-works/recentlimitwork?limit=${limit}&page=${pageNumber}`
       );
-      setRecentLimit(res.data.data);
-      console.log("Recent Limit Data:", res.data.data);
+
+      const newData = res.data.data;
+
+      if (newData.length < limit) {
+        setHasMore(false); // no more data to load
+      }
+
+      if (pageNumber === 1) {
+        setRecentLimit(newData); // first load replace data
+      } else {
+        setRecentLimit((prev) => [...prev, ...newData]); // append on subsequent loads
+      }
+
+      console.log("Recent Limit Data:", newData);
     } catch (error) {
-      console.error("Error fetching home:", error);
+      console.error("Error fetching recent limit works:", error);
     }
+    setLoadingMore(false);
   };
+
   const fetchRecentBanner = async () => {
     try {
       let res = await axios.get("/recentWorkBanner");
@@ -74,8 +93,33 @@ const RecentWorks = () => {
     fetchRecentWorks();
     fetchHome();
     fetchRecentBanner();
-    recentLimitfn();
+    recentLimitfn(page);
   }, []);
+  const popupScrollRef = useRef(null);
+
+  useEffect(() => {
+    function onScroll() {
+      if (!popupScrollRef.current || loadingMore || !hasMore) return;
+
+      const { scrollTop, scrollHeight, clientHeight } = popupScrollRef.current;
+
+      // Load more when near bottom (50px threshold)
+      if (scrollHeight - scrollTop - clientHeight < 10) {
+        setPage((prev) => prev + 1);
+      }
+    }
+
+    const popupEl = popupScrollRef.current;
+    if (popupEl) {
+      popupEl.addEventListener("scroll", onScroll);
+    }
+
+    return () => {
+      if (popupEl) {
+        popupEl.removeEventListener("scroll", onScroll);
+      }
+    };
+  }, [loadingMore, hasMore]);
 
   // Function to handle clicking on an image
   const handleImageClick = (image, id) => {
@@ -140,12 +184,17 @@ const RecentWorks = () => {
     };
   }, [isPopupVisible]);
 
+  // Update useEffect for page changes
+  useEffect(() => {
+    recentLimitfn(page);
+  }, [page]);
+
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
       className={`h-[48.5%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}
     >
-      {isPopupVisible && (
+      {/* {isPopupVisible && (
         <div
           ref={popupRef}
           className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#8BC24A] p-4 "
@@ -161,7 +210,56 @@ const RecentWorks = () => {
             </button>
           </div>
         </div>
+      )} */}
+      {isPopupVisible && (
+        <div
+          ref={popupRef}
+          className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#8BC24A] p-4"
+        >
+          <div className="relative w-full h-full">
+            {/* Close button */}
+            <button
+              onClick={() => setPopupVisible(false)}
+              className="absolute -top-2 -right-2 z-10 bg-white hover:bg-gray-200 transition-colors duration-200 p-1.5 rounded-full shadow-lg"
+            >
+              <IoClose className="text-2xl text-[#8BC24A]" />
+            </button>
+
+            <div
+              ref={popupScrollRef}
+              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-auto h-full pt-2"
+            >
+              {recentLimit.map((work, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleImageClick(work.images[0], work._id)}
+                  className="aspect-square relative cursor-pointer hover:opacity-80 transition-opacity"
+                >
+                  <img
+                    className="h-full w-full object-cover"
+                    src={`${serverUrl}/${work.images[0]}`}
+                    alt={work.title}
+                  />
+                  <p className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 text-center">
+                    {work.title}
+                  </p>
+                </div>
+              ))}
+              {loadingMore && (
+                <div className="col-span-4 text-center py-4 text-white">
+                  Loading more...
+                </div>
+              )}
+              {!hasMore && (
+                <div className="col-span-4 text-center py-4 text-white">
+                  No more works to show
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
+
       <div className="absolute top-0 left-0 w-full h-full z-[-1]">
         <Slider className="h-full w-full" {...settings}>
           {recentBanner
