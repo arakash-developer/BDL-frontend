@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "../axios";
@@ -26,6 +27,9 @@ const RecentWorks = () => {
   const [selectedRecentImage, setSelectedRecentImage] = useState("");
   const [allCount, setAllCount] = useState(0);
   const [recentBanner, setRecentBanner] = useState([]);
+  let [recentlimit, setRecentLimit] = useState([]);
+  let limit = 12;
+  let page = 1;
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -46,11 +50,22 @@ const RecentWorks = () => {
       console.error("Error fetching home:", error);
     }
   };
+  const recentLimitfn = async () => {
+    try {
+      let res = await axios.get(
+        `/recent-works/recentlimitwork?limit=${limit}&page=${page}`
+      );
+      setRecentLimit(res.data.data);
+      console.log("Recent Limit Data:", res.data.data);
+    } catch (error) {
+      console.error("Error fetching home:", error);
+    }
+  };
   const fetchRecentBanner = async () => {
     try {
       let res = await axios.get("/recentWorkBanner");
       setRecentBanner(res.data);
-      console.log("Recent Banner Data:", res.data);
+      // console.log("Recent Banner Data:", res.data);
     } catch (error) {
       console.error("Error fetching recent banner:", error);
     }
@@ -59,6 +74,7 @@ const RecentWorks = () => {
     fetchRecentWorks();
     fetchHome();
     fetchRecentBanner();
+    recentLimitfn();
   }, []);
 
   // Function to handle clicking on an image
@@ -123,6 +139,7 @@ const RecentWorks = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isPopupVisible]);
+
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
@@ -131,11 +148,18 @@ const RecentWorks = () => {
       {isPopupVisible && (
         <div
           ref={popupRef}
-          className="absolute top-0 left-0 w-full h-full z-[999999] bg-red-500"
+          className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#8BC24A] p-4 "
         >
-          {" "}
-          mmmmm
-          <button onClick={() => setPopupVisible(false)}>Close</button>
+          <div className="grid grid-cols-4 items-start justify-start gap-y-3 overflow-y-scroll h-full">
+            {recentlimit.map((work, i) => (
+              <div key={i} className="w-[85px] h-[70px] bg-[#F15B26]">
+                {i}
+              </div>
+            ))}
+            <button onClick={() => setPopupVisible(false)}>
+              <IoClose className="absolute top-2 right-1 text-2xl cursor-pointer" />
+            </button>
+          </div>
         </div>
       )}
       <div className="absolute top-0 left-0 w-full h-full z-[-1]">

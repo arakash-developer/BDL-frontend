@@ -1,5 +1,5 @@
 import { Button, Form, Image, Input, Modal, Spin } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoEyeOff } from "react-icons/io5";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "../axios";
@@ -9,6 +9,7 @@ import Preloader from "../components/Preloader.jsx";
 import { AuthContext } from "../context/AuthContext.jsx";
 
 function ProductDetailOne() {
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { authUser, login } = useContext(AuthContext);
   const [form] = Form.useForm();
@@ -112,7 +113,7 @@ function ProductDetailOne() {
           id: products[0]._id,
           series: products[0].series.name,
           itemCode: products[0].itemCode,
-          image: `https://code.bdluminaries.com/${products[0].image}`,
+          image: `${serverUrl}/${products[0].image}`,
           price: products[0].price,
           description: products[0].description || "No description available.",
         });
@@ -140,7 +141,7 @@ function ProductDetailOne() {
           id: products[0]._id,
           series: products[0].series.name,
           itemCode: products[0].itemCode,
-          image: `https://code.bdluminaries.com/${products[0].image}`,
+          image: `${serverUrl}/${products[0].image}`,
           price: products[0].price,
           description: products[0].description || "No description available.",
         });
@@ -161,14 +162,14 @@ function ProductDetailOne() {
         );
         const recentWorksWithImage = recentWorks.flatMap((item) => {
           return item.images.map(
-            (image) => `https://code.bdluminaries.com/${image}`
+            (image) => `${serverUrl}/${image}`
           );
         });
         const recentWorksWithVideo = recentWorks.flatMap((item) => {
           return item.videos.map((video) => {
             return {
-              video: `https://code.bdluminaries.com/${video.video}`,
-              thumbnail: `https://code.bdluminaries.com/${video.thumbnail}`,
+              video: `${serverUrl}/${video.video}`,
+              thumbnail: `${serverUrl}/${video.thumbnail}`,
             };
           });
         });
@@ -191,7 +192,7 @@ function ProductDetailOne() {
       id: product._id,
       series: product.series.name,
       itemCode: product.itemCode,
-      image: `https://code.bdluminaries.com/${product.image}`,
+      image: `${serverUrl}/${product.image}`,
       price: product.price,
       description: product.description || "No description available.",
     });
@@ -219,7 +220,7 @@ function ProductDetailOne() {
                 }}
               >
                 <img
-                  src={`https://code.bdluminaries.com/${product.image}`}
+                  src={`${serverUrl}/${product.image}`}
                   className="w-full h-11 object-contain"
                   alt={product?.itemCode || "Product image missing"}
                 />
@@ -258,7 +259,7 @@ function ProductDetailOne() {
                 }} // Update products when clicked
               >
                 <img
-                  src={`https://code.bdluminaries.com/${item.image}`}
+                  src={`${serverUrl}/${item.image}`}
                   className="w-full h-11 object-contain"
                   alt={item.Title}
                 />
@@ -284,7 +285,7 @@ function ProductDetailOne() {
                             setSubSeriesID(subItem._id);
                             setSearchParams({ subSeries: subItem._id });
                           }}
-                          src={`https://code.bdluminaries.com/${subItem.image}`}
+                          src={`${serverUrl}/${subItem.image}`}
                           className="w-full h-11 object-contain"
                           alt={subItem.series.name}
                         />
