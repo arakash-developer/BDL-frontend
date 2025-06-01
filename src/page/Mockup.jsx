@@ -241,40 +241,42 @@ const Mockup = () => {
           </div>
 
           {/* Mockup zone section */}
-          <div
-            className="h-[274px] col-span-3 grid grid-cols-3 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
-            onScroll={handleScroll}
-          >
-            <h3 className="text-xs col-span-3 bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
+          <div className="col-span-3">
+            <h3 className="text-xs mb-3 bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
               Mockup zone
             </h3>
-            {shuffledContent.map((item) => (
-              <div
-                key={item.id}
-                className="shadow-md rounded h-14"
-                onClick={() => {
-                  setSearchParams({
-                    src: item.type === "video" ? item.video : item.src,
-                    type: item.type,
-                  });
-                  displayContent(
-                    item.type,
-                    item.type === "video" ? item.video : item.src // Updated to use src for images
-                  );
-                }}
-              >
-                <img
-                  src={`${serverUrl}/${
-                    item.type === "video" ? item.thumbnail : item.src
-                  } `} // Updated to use src for images
-                  className="w-full h-14 object-cover rounded"
-                  alt={item.type}
-                />
-              </div>
-            ))}
-            {loading && (
-              <div className="col-span-3 text-center py-2">Loading...</div>
-            )}
+            <div
+              className="h-[274px]  grid grid-cols-3 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
+              onScroll={handleScroll}
+            >
+              {shuffledContent.map((item) => (
+                <div
+                  key={item.id}
+                  className="shadow-md rounded h-14"
+                  onClick={() => {
+                    setSearchParams({
+                      src: item.type === "video" ? item.video : item.src,
+                      type: item.type,
+                    });
+                    displayContent(
+                      item.type,
+                      item.type === "video" ? item.video : item.src // Updated to use src for images
+                    );
+                  }}
+                >
+                  <img
+                    src={`${serverUrl}/${
+                      item.type === "video" ? item.thumbnail : item.src
+                    } `} // Updated to use src for images
+                    className="w-full h-14 object-cover rounded"
+                    alt={item.type}
+                  />
+                </div>
+              ))}
+              {loading && (
+                <div className="col-span-3 text-center py-2">Loading...</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
