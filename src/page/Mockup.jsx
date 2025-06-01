@@ -214,30 +214,32 @@ const Mockup = () => {
         {/* Thumbnail Section */}
         <div className="grid grid-cols-4 gap-4 p-2">
           {/* Recent work section */}
-          <div
-            className="col-span-1 grid grid-cols-1 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b"
-            onScroll={handleRecentWorkScroll}
-          >
-            <h3 className="text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
-              Recent work
-            </h3>
-            {recentWorks &&
-              recentWorks.map((work) => (
-                <div
-                  key={work._id}
-                  onClick={() => handleImageClick(work.images[0], work._id)}
-                  className="shadow-md rounded"
-                >
-                  <img
-                    src={`${serverUrl}/${work.images[0]}`}
-                    className="w-full h-14 object-cover rounded"
-                    alt="Recent work"
-                  />
-                </div>
-              ))}
-            {recentWorkLoading && (
-              <div className="text-center py-2">Loading...</div>
-            )}
+          <div className="col-span-1">
+            <div
+              className="h-[274px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
+              onScroll={handleRecentWorkScroll}
+            >
+              <h3 className="text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
+                Recent work
+              </h3>
+              {recentWorks &&
+                recentWorks.map((work) => (
+                  <div
+                    key={work._id}
+                    onClick={() => handleImageClick(work.images[0], work._id)}
+                    className="shadow-md rounded"
+                  >
+                    <img
+                      src={`${serverUrl}/${work.images[0]}`}
+                      className="w-full h-14 object-cover rounded"
+                      alt="Recent work"
+                    />
+                  </div>
+                ))}
+              {recentWorkLoading && (
+                <div className="text-center py-2 text-black">Loading...</div>
+              )}
+            </div>
           </div>
 
           {/* Mockup zone section */}
@@ -274,7 +276,9 @@ const Mockup = () => {
                 </div>
               ))}
               {loading && (
-                <div className="col-span-3 text-center py-2 text-black">Loading...</div>
+                <div className="col-span-3 text-center py-2 text-black">
+                  Loading...
+                </div>
               )}
             </div>
           </div>
