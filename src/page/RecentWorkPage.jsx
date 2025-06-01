@@ -177,17 +177,14 @@ const RecentWork = () => {
         <div className="grid grid-cols-4 gap-4 p-2">
           {/* Recent Work section */}
           <div className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b">
-            <div className="col-span-3 bg-[#F15B26] sticky top-0 left-0 h-7 flex items-center w-full shadow-md rounded-b">
-              <div className="w-2/3 flex items-center justify-start pl-2">
-                <h3 className="text-xs text-white font-bold">Recent Work-</h3>
-                <p className="text-xs text-white font-bold ml-1">
-                  ({singelRecentWork?.projectId})
+            <div className="col-span-3 bg-[#F15B26] sticky top-0 left-0 h-8 flex flex-col items-center w-full shadow-md rounded-b">
+              <div className="">
+                <p className="text-[11px] text-white font-bold capitalize">
+                  {singelRecentWork?.projectId}
                 </p>
               </div>
-              <p className="w-1/3 text-xs op-0 left-0 h-7 flex items-center justify-center text-center text-white font-bold">
-                <marquee behavior="" direction="">
-                  ({singelRecentWork?.location || "N/A"})
-                </marquee>
+              <p className="text-[8px] op-0 left-0 flex items-center justify-center text-center text-white font-bold">
+                ({singelRecentWork?.location || "N/A"})
               </p>
             </div>
             {shuffledContent
