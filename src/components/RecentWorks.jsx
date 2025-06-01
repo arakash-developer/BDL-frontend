@@ -249,7 +249,7 @@ const RecentWorks = () => {
                 </div>
               )}
               {!hasMore && (
-                <div className="col-span-4 text-center py-4 text-white">
+                <div className="col-span-4 text-center py-4 text-black">
                   No more works to show
                 </div>
               )}

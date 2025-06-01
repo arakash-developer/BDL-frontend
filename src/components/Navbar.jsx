@@ -17,7 +17,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between h-[3%] bg-[#000000] md:rounded-b-2xl relative z-30">
+    <div className="flex items-center justify-between h-[4%] bg-[#000000] md:rounded-b-2xl relative z-30">
       <Link
         className="flex h-full items-center justify-center w-[15%] text-xs"
         to="/"
@@ -63,7 +63,7 @@ const Navbar = () => {
         className="w-[15%] flex justify-center items-center text-[#F15B26]"
         to="/menu"
       >
-        <AiOutlineProduct />
+        <AiOutlineProduct className="text-xl" />
       </Link>
     </div>
   );
