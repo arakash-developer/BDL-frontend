@@ -68,7 +68,7 @@ const RecentWork = () => {
       try {
         const res = await axios.get(`recent-works/${id}`);
         if (res.status === 200) {
-          console.log("Selected recent work:", res.data);
+          // console.log("Selected recent work:", res.data);
 
           setSingelRecentWork(res?.data);
           if (!searchParams.get("src")) {
