@@ -31,7 +31,7 @@ const RecentWorks = () => {
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  let limit = 12;
+  let limit = 15;
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -95,32 +95,6 @@ const RecentWorks = () => {
     fetchRecentBanner();
     recentLimitfn(page);
   }, []);
-  const popupScrollRef = useRef(null);
-
-  useEffect(() => {
-    function onScroll() {
-      if (!popupScrollRef.current || loadingMore || !hasMore) return;
-
-      const { scrollTop, scrollHeight, clientHeight } = popupScrollRef.current;
-
-      // Load more when near bottom (50px threshold)
-      if (scrollHeight - scrollTop - clientHeight < 10) {
-        setPage((prev) => prev + 1);
-      }
-    }
-
-    const popupEl = popupScrollRef.current;
-    if (popupEl) {
-      popupEl.addEventListener("scroll", onScroll);
-    }
-
-    return () => {
-      if (popupEl) {
-        popupEl.removeEventListener("scroll", onScroll);
-      }
-    };
-  }, [loadingMore, hasMore]);
-
   // Function to handle clicking on an image
   const handleImageClick = (image, id) => {
     console.log(id, image);
@@ -189,6 +163,29 @@ const RecentWorks = () => {
     recentLimitfn(page);
   }, [page]);
 
+  const containerRef = useRef(null);
+  const [passed10Percent, setPassed10Percent] = useState(false);
+
+  const handleScroll = () => {
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+
+      if (scrollPercent >= 10) {
+        if (!passed10Percent) {
+          console.log("User scrolled past 10%!");
+          setPage((prev) => prev + 1);
+          setPassed10Percent(true);
+        }
+      } else {
+        if (passed10Percent) {
+          // User scrolled back above 10%
+          setPassed10Percent(false);
+        }
+      }
+    }
+  };
+
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
@@ -226,8 +223,9 @@ const RecentWorks = () => {
             </button>
 
             <div
-              ref={popupScrollRef}
-              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-auto h-full pt-2"
+              ref={containerRef}
+              onScroll={handleScroll}
+              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-scroll h-full pt-2"
             >
               {recentLimit.map((work, i) => (
                 <div
