@@ -98,7 +98,9 @@ const RecentWorks = () => {
   // Function to handle clicking on an image
   const handleImageClick = (image, id) => {
     console.log(id, image);
-    navigate(`/work/${id}`);
+    if (id !== null) {
+      navigate(`/work/${id}`);
+    }
   };
 
   // for button
@@ -135,8 +137,9 @@ const RecentWorks = () => {
     setActiveIndex((prev) => (prev < 16 ? prev + 1 : 17));
   };
   let handlerRecentGoto = (recent) => {
-    console.log("Recent Goto Clicked");
-    navigate(`/work/${recent}`);
+    if (recent !== null) {
+      navigate(`/work/${recent}`);
+    }
   };
 
   // Close popup if click outside
