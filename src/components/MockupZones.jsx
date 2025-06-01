@@ -46,7 +46,7 @@ const MockupZones = () => {
   };
 
   return (
-    <Slider className="h-[48.5%] w-screen" {...settings}>
+    <Slider className="h-[48%] w-screen" {...settings}>
       {zones?.map((zone, index) => (
         <div
           className="flex-1"

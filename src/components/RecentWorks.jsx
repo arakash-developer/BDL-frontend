@@ -189,7 +189,7 @@ const RecentWorks = () => {
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
-      className={`h-[48.5%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}
+      className={`h-[48%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}
     >
       {/* {isPopupVisible && (
         <div
