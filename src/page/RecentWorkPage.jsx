@@ -41,7 +41,6 @@ const RecentWork = () => {
       try {
         const response = await axios.get(`${serverUrl}/api/v1/recent-works`);
         const data = response?.data;
-
         const formattedContent = data?.flatMap((work) => {
           const images = work?.images?.map((image) => ({
             id: work?._id,
@@ -69,6 +68,8 @@ const RecentWork = () => {
       try {
         const res = await axios.get(`recent-works/${id}`);
         if (res.status === 200) {
+          console.log("Selected recent work:", res.data);
+
           setSingelRecentWork(res?.data);
           if (!searchParams.get("src")) {
             setSearchParams({ type: "image", src: res?.data?.images[0] });
@@ -176,9 +177,19 @@ const RecentWork = () => {
         <div className="grid grid-cols-4 gap-4 p-2">
           {/* Recent Work section */}
           <div className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b">
-            <h3 className="text-xs col-span-3 bg-[#F15B26] sticky top-0 left-0 h-7 flex items-center justify-center text-center text-white font-bold w-full shadow-md rounded-b">
-              Recent Work
-            </h3>
+            <div className="col-span-3 bg-[#F15B26] sticky top-0 left-0 h-7 flex items-center w-full shadow-md rounded-b">
+              <div className="w-2/3 flex items-center justify-start pl-2">
+                <h3 className="text-xs text-white font-bold">Recent Work-</h3>
+                <p className="text-xs text-white font-bold ml-1">
+                  ({singelRecentWork?.projectId})
+                </p>
+              </div>
+              <p className="w-1/3 text-xs op-0 left-0 h-7 flex items-center justify-center text-center text-white font-bold">
+                <marquee behavior="" direction="">
+                  ({singelRecentWork?.location || "N/A"})
+                </marquee>
+              </p>
+            </div>
             {shuffledContent
               ?.filter((_, i) => i > 0)
               .map((item, index) => (
