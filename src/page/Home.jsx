@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
-    <div className="h-[100vh] relative flex flex-col justify-between">
+    <div className="h-[100vh] overflow-hidden relative flex flex-col justify-between">
       <MockupZones />
       <Navbar />
       <RecentWorks />
