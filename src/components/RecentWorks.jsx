@@ -225,7 +225,7 @@ const RecentWorks = () => {
             <div
               ref={containerRef}
               onScroll={handleScroll}
-              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-scroll pt-2 h-full no-scrollbar"
+              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-auto pt-2 h-[420px] no-scrollbar"
             >
               {recentLimit.map((work, i) => (
                 <div
