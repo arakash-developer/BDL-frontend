@@ -274,7 +274,7 @@ const Mockup = () => {
                 </div>
               ))}
               {loading && (
-                <div className="col-span-3 text-center py-2">Loading...</div>
+                <div className="col-span-3 text-center py-2 text-black">Loading...</div>
               )}
             </div>
           </div>
