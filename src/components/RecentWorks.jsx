@@ -303,7 +303,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[0]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[0]?.title}
         </p>
       </div>
@@ -319,8 +320,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[15]?.images[0]}`}
           alt=""
         /> */}
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
-          {/* {works[15]?.title} */}1 To {allCount.recentWorkCount}
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
+          1 To {allCount.recentWorkCount}
         </p>
       </div>
       <div
@@ -334,7 +335,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[14]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2  rounded-t ">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[14]?.title}
         </p>
       </div>
@@ -349,7 +351,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[13]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[13]?.title}
         </p>
       </div>
@@ -364,7 +367,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[12]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[12]?.title}
         </p>
       </div>
@@ -379,7 +383,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[1]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[1]?.title}
         </p>
       </div>
@@ -399,7 +404,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[11]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[11]?.title}
         </p>
       </div>
@@ -414,7 +420,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[2]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[2]?.title}
         </p>
       </div>
@@ -430,8 +437,9 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[10]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
-          {works[10]?.title}-
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
+          {works[10]?.title}
         </p>
       </div>
 
@@ -446,7 +454,7 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[3]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[3]?.title}
         </p>
       </div>
@@ -462,7 +470,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[9]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[9]?.title}
         </p>
       </div>
@@ -477,7 +486,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[4]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[4]?.title}
         </p>
       </div>
@@ -493,7 +503,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[5]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[5]?.title}
         </p>
       </div>
@@ -508,7 +519,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[6]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[6]?.title}
         </p>
       </div>
@@ -523,7 +535,8 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[7]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[7]?.title}
         </p>
       </div>
@@ -538,7 +551,7 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[8]?.images[0]}`}
           alt=""
         />
-        <p className="absolute textShadow-custom bg-white/30 left-1/2 -translate-x-1/2 bottom-0 textShadow text-xs text-white font-bold px-2 rounded-t">
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[8]?.title}
         </p>
       </div>
