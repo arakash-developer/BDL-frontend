@@ -244,7 +244,7 @@ const RecentWorks = () => {
                 </div>
               ))}
               {loadingMore && (
-                <div className="col-span-4 text-center py-4 text-white">
+                <div className="col-span-4 text-center py-4 text-black">
                   Loading more...
                 </div>
               )}
