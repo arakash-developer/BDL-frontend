@@ -320,7 +320,7 @@ const RecentWorks = () => {
           src={`${serverUrl}/${works[15]?.images[0]}`}
           alt=""
         /> */}
-        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
+        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center cursor-pointer ">
           1 To {allCount.recentWorkCount}
         </p>
       </div>
