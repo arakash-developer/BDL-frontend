@@ -1,4 +1,5 @@
 import { Image } from "antd";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -22,24 +23,42 @@ const Mockup = () => {
   const [videoPage, setVideoPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [recentWorkPage, setRecentWorkPage] = useState(1);
+  const [recentWorkLoading, setRecentWorkLoading] = useState(false);
+  const [hasMoreRecentWorks, setHasMoreRecentWorks] = useState(true);
 
   // Fetch data for recent works from the API
   useEffect(() => {
     const fetchRecentWorks = async () => {
       try {
-        const response = await fetch(`${serverUrl}/api/v1/recent-works`);
-        const data = await response.json();
+        setRecentWorkLoading(true);
+        const response = await axios.get(
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=6&page=${recentWorkPage}`
+        );
+        // Access the data property of the response
+        const data = response.data.data;
 
-        // Process the data to extract only image data
-        const imageWorks = data.sort((a, b) => a.prioroty - b.prioroty);
-        setRecentWorks(imageWorks); // Set recent works with only images
+        if (!data || data.length === 0) {
+          setHasMoreRecentWorks(false);
+          return;
+        }
+
+        // Sort and set the recent works
+        const imageWorks = data.sort((a, b) => a.priority - b.priority);
+        if (recentWorkPage === 1) {
+          setRecentWorks(imageWorks);
+        } else {
+          setRecentWorks((prev) => [...prev, ...imageWorks]);
+        }
       } catch (error) {
         console.error("Error fetching recent works:", error);
+      } finally {
+        setRecentWorkLoading(false);
       }
     };
 
     fetchRecentWorks();
-  }, []);
+  }, [recentWorkPage]);
 
   // Fetch data for mockup images from the API
   useEffect(() => {
@@ -148,6 +167,20 @@ const Mockup = () => {
     }
   };
 
+  const handleRecentWorkScroll = (e) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.target;
+    if (
+      scrollHeight - scrollTop <= clientHeight * 1.1 &&
+      !recentWorkLoading &&
+      hasMoreRecentWorks
+    ) {
+      setRecentWorkPage((prev) => prev + 1);
+    }
+  };
+
+  // Add this console.log to debug
+  console.log("Recent Works:", recentWorks);
+
   if (!singleMockupZoneImages.length > 0) {
     return <Preloader />;
   }
@@ -181,23 +214,30 @@ const Mockup = () => {
         {/* Thumbnail Section */}
         <div className="grid grid-cols-4 gap-4 p-2">
           {/* Recent work section */}
-          <div className="col-span-1 grid grid-cols-1 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b">
+          <div
+            className="col-span-1 grid grid-cols-1 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b"
+            onScroll={handleRecentWorkScroll}
+          >
             <h3 className="text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
               Recent work
             </h3>
-            {recentWorks.map((work) => (
-              <div
-                key={work.id}
-                onClick={() => handleImageClick(work.images[0], work._id)}
-                className="shadow-md rounded"
-              >
-                <img
-                  src={`${serverUrl}/${work.images[0]}`}
-                  className="w-full h-14 object-cover rounded"
-                  alt="Recent work"
-                />
-              </div>
-            ))}
+            {recentWorks &&
+              recentWorks.map((work) => (
+                <div
+                  key={work._id}
+                  onClick={() => handleImageClick(work.images[0], work._id)}
+                  className="shadow-md rounded"
+                >
+                  <img
+                    src={`${serverUrl}/${work.images[0]}`}
+                    className="w-full h-14 object-cover rounded"
+                    alt="Recent work"
+                  />
+                </div>
+              ))}
+            {recentWorkLoading && (
+              <div className="text-center py-2">Loading...</div>
+            )}
           </div>
 
           {/* Mockup zone section */}
