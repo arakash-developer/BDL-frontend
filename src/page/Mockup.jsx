@@ -18,6 +18,10 @@ const Mockup = () => {
   const [recentWorks, setRecentWorks] = useState([]); // State for recent works
   // const [mockupImages, setMockupImages] = useState([]);
   const [singleMockupZoneImages, setSingleMockupZoneImages] = useState([]);
+  const [imagePage, setImagePage] = useState(1);
+  const [videoPage, setVideoPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   // Fetch data for recent works from the API
   useEffect(() => {
@@ -72,13 +76,21 @@ const Mockup = () => {
 
     const fetchSingleMockupData = async () => {
       try {
-        const response = await fetch(`${serverUrl}/api/v1/mockup-zones/${id}`);
+        setLoading(true);
+        const response = await fetch(
+          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}`
+        );
         const data = await response.json();
-        // Set selected content to the first image in the mockup
-        if (!searchParams.get("src")) {
-          console.log("fuwf");
+
+        if (!data.images.length && !data.videos.length) {
+          setHasMore(false);
+          return;
+        }
+
+        if (!searchParams.get("src") && data.images[0]) {
           setSearchParams({ type: "image", src: data.images[0] });
         }
+
         // Process the data to extract images and videos
         const combinedSingleContent = [data].flatMap((zone) => {
           const imagesWithType = zone.images.map((img) => ({
@@ -92,13 +104,19 @@ const Mockup = () => {
           }));
           return [...imagesWithType, ...videosWithType];
         });
-        setSingleMockupZoneImages(combinedSingleContent);
+
+        setSingleMockupZoneImages((prev) => [
+          ...prev,
+          ...combinedSingleContent,
+        ]);
       } catch (error) {
         console.error("Error fetching mockup data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSingleMockupData();
-  }, []);
+  }, [imagePage, videoPage]);
 
   // Shuffle mockup images
   useEffect(() => {
@@ -120,6 +138,14 @@ const Mockup = () => {
   // Function to handle image click
   const handleImageClick = (image, id) => {
     navigate(`/work/${id}`);
+  };
+
+  const handleScroll = (e) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.target;
+    if (scrollHeight - scrollTop <= clientHeight * 1.1 && !loading && hasMore) {
+      setImagePage((prev) => prev + 1);
+      setVideoPage((prev) => prev + 1);
+    }
   };
 
   if (!singleMockupZoneImages.length > 0) {
@@ -175,7 +201,10 @@ const Mockup = () => {
           </div>
 
           {/* Mockup zone section */}
-          <div className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b">
+          <div
+            className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b"
+            onScroll={handleScroll}
+          >
             <h3 className="text-xs col-span-3 bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
               Mockup zone
             </h3>
@@ -203,6 +232,9 @@ const Mockup = () => {
                 />
               </div>
             ))}
+            {loading && (
+              <div className="col-span-3 text-center py-2">Loading...</div>
+            )}
           </div>
         </div>
       </div>
