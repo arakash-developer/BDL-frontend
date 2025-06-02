@@ -19,9 +19,7 @@ const RecentWork = () => {
     src: "",
   });
   const [newSeletedContent, setNewSeletedContent] = useState();
-
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchMockupData = async () => {
       try {
@@ -178,10 +176,16 @@ const RecentWork = () => {
           {/* Recent Work section */}
           <div className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b">
             <div className="col-span-3 bg-[#F15B26] sticky top-0 left-0 h-8 flex flex-col items-center w-full shadow-md rounded-b">
-              <div className="">
-                <p className="text-[11px] text-white font-bold capitalize">
-                  {singelRecentWork?.projectId}
-                </p>
+              <div className="w-full">
+                <div className="text-[11px] text-white font-bold capitalize w-full text-center">
+                  {singelRecentWork?.projectId?.length > 60 ? (
+                    <marquee speed={50} gradient={false}>
+                      {singelRecentWork?.projectId}
+                    </marquee>
+                  ) : (
+                    singelRecentWork?.projectId
+                  )}
+                </div>
               </div>
               <p className="text-[8px] op-0 left-0 flex items-center justify-center text-center text-white font-bold">
                 {singelRecentWork?.location || "N/A"}
