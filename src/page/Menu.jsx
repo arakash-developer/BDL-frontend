@@ -185,16 +185,7 @@ const Menu = () => {
           <MenuIcon className={`${show ? "flex" : "hidden"}`} />
         </div>
         <div className="flex items-center justify-between h-7 bg-[#000000] ">
-          <Link
-            className="flex h-full items-center justify-center w-[20%] text-xs"
-            to="/"
-          >
-            <img
-              className="h-full drop-shadow-custom"
-              src="/assets/bdl.png"
-              alt=""
-            />
-          </Link>
+   
           <div className="flex items-center h-7">
             <Navbar className="h-full" />
           </div>
