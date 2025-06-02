@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Marquee from "react-fast-marquee";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
@@ -9,10 +8,11 @@ import MenuIcon from "../components/MenuIcon";
 import Preloader from "../components/Preloader";
 
 import Consultancy from "../components/Consultancy";
+import Navbar from "../components/Navbar";
 import "./Menu.css";
 
 const Menu = () => {
-    let serverUrl = import.meta.env.VITE_SERVER_URL;
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,9 +39,9 @@ const Menu = () => {
   // Fetch active images
   const fetchActiveImages = async () => {
     try {
-      let res = await axios.get(
-      `${serverUrl}/api/v1/greeting`
-      );
+      let res = await axios.get(`${serverUrl}/api/v1/greeting`);
+      console.log("Active images:", res.data);
+
       setActiveImages(res.data.filter((item) => item.status === "active"));
     } catch (error) {
       console.error("Error fetching active images:", error);
@@ -195,18 +195,10 @@ const Menu = () => {
               alt=""
             />
           </Link>
-
-          {/* Fetching active images and displaying them */}
-          <Marquee
-            speed={20}
-            direction="left"
-            pauseOnHover={true}
-            reverse={true}
-            gradient={false}
-            gradientColor={["#6FA710"]}
-            className="h-7"
-          >
-            <div className="flex items-center h-7">
+          <div className="flex items-center h-7">
+            <Navbar className="h-full" />
+          </div>
+          {/* <div className="flex items-center h-7">
               {activeImages.map((image, index) => (
                 <img
                   key={index}
@@ -215,9 +207,7 @@ const Menu = () => {
                   alt={image.title}
                 />
               ))}
-            </div>
-          </Marquee>
-
+            </div> */}
           <div
             className="navItem w-[20%] h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
             onClick={handleToggle}
