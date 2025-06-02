@@ -97,7 +97,7 @@ const Mockup = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=6&videoLimit=7`
+          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=12&videoLimit=6`
         );
         const data = await response.json();
 

@@ -10,7 +10,7 @@ const Footer = ({ className }) => {
   let year = d.getFullYear();
   return (
     <div
-      className={`bg-black w-full  py-2 px-3 flex justify-between items-center ${className}`}
+      className={`bg-black w-full fix py-2 px-3 flex justify-between items-center ${className}`}
     >
       <p className="text-white/70 text-[12px]">
         © {year} •{" "}
