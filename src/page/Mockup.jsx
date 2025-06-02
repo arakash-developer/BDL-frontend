@@ -215,13 +215,13 @@ const Mockup = () => {
         <div className="grid grid-cols-4 gap-4 p-2">
           {/* Recent work section */}
           <div className="col-span-1">
+              <h3 className="mb-3 text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
+                Recent work
+              </h3>
             <div
               className="h-[274px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
               onScroll={handleRecentWorkScroll}
             >
-              <h3 className="text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
-                Recent work
-              </h3>
               {recentWorks &&
                 recentWorks.map((work) => (
                   <div
