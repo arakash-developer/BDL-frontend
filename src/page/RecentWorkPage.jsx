@@ -184,7 +184,7 @@ const RecentWork = () => {
                 </p>
               </div>
               <p className="text-[8px] op-0 left-0 flex items-center justify-center text-center text-white font-bold">
-                ({singelRecentWork?.location || "N/A"})
+                {singelRecentWork?.location || "N/A"}
               </p>
             </div>
             {shuffledContent
