@@ -18,64 +18,68 @@ const Navbar = ({ className, click, menu }) => {
 
   return (
     <div
-      className={`${className} flex items-center justify-between h-[4%] bg-[#000000] md:rounded-b-2xl relative z-30`}
+      className={`${className} flex items-center justify-between h-[4%] md:rounded-b-2xl relative z-30`}
     >
       <Link
-        className="flex h-full items-center justify-center w-[15%] text-xs"
+        className="flex items-center justify-center  bg-[#000000] w-[180px] h-[40px] text-xs relative"
         to="/"
       >
         <img
-          className="h-full drop-shadow-custom"
+          className="h-[25px] w-[30px] drop-shadow-custom"
           src="/assets/bdl.png"
           alt=""
         />
       </Link>
-      <Marquee
-        speed={20}
-        direction="left"
-        pauseOnHover={true}
-        reverse={true}
-        gradient={false}
-        gradientColor={["#6FA710"]}
-        className="h-full"
-      >
-        <div className="flex items-center">
-          {greetings.length > 0 ? (
-            greetings
-              .filter((greeting) => greeting.status === "active")
-              .map((greeting) => (
-                <img
-                  key={greeting._id}
-                  className="h-7"
-                  src={`${serverUrl}/${greeting.image}`}
-                  alt={greeting.title}
-                />
-              ))
-          ) : (
-            // Fallback in case data is not yet loaded
-            <>
-              <img className="h-7" src={slogan} alt="slogan" />
-              <img className="h-7" src={slogan} alt="slogan" />
-              <img className="h-7" src={slogan} alt="slogan" />
-            </>
-          )}
-        </div>
-      </Marquee>
-      {menu ? (
-        <div
-          className="w-[20%] h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
-          onClick={click}
+      <div className=" bg-[#000000] h-full">
+        <Marquee
+          speed={20}
+          direction="left"
+          pauseOnHover={true}
+          reverse={true}
+          gradient={false}
+          gradientColor={["#6FA710"]}
+          className="h-full"
         >
-          <HiDotsHorizontal className="text-xl" />
-        </div>
-      ) : (
-        <Link
-          className="w-[15%] flex justify-center items-center text-[#F15B26]"
-          to="/menu"
-        >
-          <AiOutlineProduct className="text-xl" />
-        </Link>
-      )}
+          <div className="flex items-center">
+            {greetings.length > 0 ? (
+              greetings
+                .filter((greeting) => greeting.status === "active")
+                .map((greeting) => (
+                  <img
+                    key={greeting._id}
+                    className="h-7"
+                    src={`${serverUrl}/${greeting.image}`}
+                    alt={greeting.title}
+                  />
+                ))
+            ) : (
+              // Fallback in case data is not yet loaded
+              <>
+                <img className="h-7" src={slogan} alt="slogan" />
+                <img className="h-7" src={slogan} alt="slogan" />
+                <img className="h-7" src={slogan} alt="slogan" />
+              </>
+            )}
+          </div>
+        </Marquee>
+      </div>
+      <div className=" bg-[#000000] w-[180px] h-[40px] relative flex justify-center items-center">
+        {menu ? (
+          <div
+            className="w-full h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
+            onClick={click}
+          >
+            <HiDotsHorizontal className="text-xl" />
+          </div>
+        ) : (
+          <Link
+            className="w-full h-full flex justify-center items-center text-[#F15B26]"
+            to="/menu"
+          >
+            <AiOutlineProduct className="text-xl" />
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
