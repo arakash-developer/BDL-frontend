@@ -17,16 +17,6 @@ const MenuIcon = ({ className }) => {
 
     const menuToggle = document.querySelector(".menuToggle");
     const menu = document.querySelector(".menu");
-
-    menuToggle.onclick = function () {
-      menu.classList.toggle("active");
-      toggleSound.currentTime = 0;
-      toggleSound.play();
-      if (menu.classList.contains("active")) {
-        openSound.currentTime = 0;
-        openSound.play();
-      }
-    };
   }, []);
 
   // Play hover sound
@@ -39,9 +29,7 @@ const MenuIcon = ({ className }) => {
   return (
     <div className={`body ${className}`}>
       <ul className="menu active">
-        <div className="menuToggle">
-          {/* <IoClose /> */}
-        </div>
+      
         <li style={{ "--i": 0, "--clr": "#F15B26" }}>
           <Link to="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Ffamilycenter.instagram.com%2Finvite%2Fp%2FUQ4KtJFka321kKbKQA0orEvY_rmQFvj4df8o4%2F%3F__coig_login%3D1" onMouseEnter={handleHover} className="group innerA">
             <FaInstagram  className="z-10 group-hover:text-[#161616] " />
