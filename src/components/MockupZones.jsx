@@ -27,13 +27,13 @@ const MockupZones = () => {
   useEffect(() => {
     const fetchMockupZones = async () => {
       try {
-        let res = await axios.get("/mockup-zones");
+        let res = await axios.get("/mokupzone-banner");
         if (res.status === 200) {
           setZones(res.data);
-          console.log(res.data);
+          console.log("Mockup Zones Data:",res.data);
         }
       } catch (error) {
-        console.error("Error fetching mockup zones:", error);
+        console.error("Error fetching mockup -:", error);
       }
     };
 
@@ -42,7 +42,7 @@ const MockupZones = () => {
 
   const handleImageClick = (zone) => {
     console.log(zone);
-    navigate(`/mockup/${zone.name}`);
+    navigate(`/mockup/${zone.mokupzone}`);
   };
 
   return (
@@ -56,8 +56,8 @@ const MockupZones = () => {
           <div key={index} className="h-full">
             <img
               className="image h-full w-full object-cover"
-              src={`${serverUrl}/${zone.images[0]}`}
-              alt={`Zone ${zone.name}`}
+              src={`${serverUrl}/${zone.image}`}
+              alt={`Zone ${zone.mokupzone}`}
             />
           </div>
         </div>
