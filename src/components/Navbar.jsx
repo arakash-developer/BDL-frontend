@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { AiOutlineProduct } from "react-icons/ai";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import slogan from "/assets/slogan.png";
-
-const Navbar = ({className}) => {
+const Navbar = ({ className, click, menu }) => {
   let serverUrl = import.meta.env.VITE_SERVER_URL;
   const [greetings, setGreetings] = useState([]);
 
@@ -17,7 +17,9 @@ const Navbar = ({className}) => {
   }, []);
 
   return (
-    <div className={`${className} flex items-center justify-between h-[4%] bg-[#000000] md:rounded-b-2xl relative z-30`}>
+    <div
+      className={`${className} flex items-center justify-between h-[4%] bg-[#000000] md:rounded-b-2xl relative z-30`}
+    >
       <Link
         className="flex h-full items-center justify-center w-[15%] text-xs"
         to="/"
@@ -59,12 +61,21 @@ const Navbar = ({className}) => {
           )}
         </div>
       </Marquee>
-      <Link
-        className="w-[15%] flex justify-center items-center text-[#F15B26]"
-        to="/menu"
-      >
-        <AiOutlineProduct className="text-xl" />
-      </Link>
+      {menu ? (
+        <div
+          className="w-[20%] h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
+          onClick={click}
+        >
+          <HiDotsHorizontal className="text-xl" />
+        </div>
+      ) : (
+        <Link
+          className="w-[15%] flex justify-center items-center text-[#F15B26]"
+          to="/menu"
+        >
+          <AiOutlineProduct className="text-xl" />
+        </Link>
+      )}
     </div>
   );
 };

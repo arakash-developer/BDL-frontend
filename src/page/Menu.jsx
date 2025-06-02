@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
-import { HiDotsHorizontal } from "react-icons/hi";
+
 import axios from "../axios";
 import MenuIcon from "../components/MenuIcon";
 import Preloader from "../components/Preloader";
@@ -187,7 +187,7 @@ const Menu = () => {
         <div className="flex items-center justify-between h-7 bg-[#000000] ">
    
           <div className="flex items-center h-7">
-            <Navbar className="h-full" />
+            <Navbar className="h-full"  click={handleToggle} menu={true}/>
           </div>
           {/* <div className="flex items-center h-7">
               {activeImages.map((image, index) => (
@@ -199,12 +199,12 @@ const Menu = () => {
                 />
               ))}
             </div> */}
-          <div
+          {/* <div
             className="navItem w-[20%] h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
             onClick={handleToggle}
           >
             <HiDotsHorizontal />
-          </div>
+          </div> */}
         </div>
 
         <Consultancy />
