@@ -38,9 +38,9 @@ const MenuIcon = ({ className }) => {
 
   return (
     <div className={`body ${className}`}>
-      <ul className="menu">
+      <ul className="menu active">
         <div className="menuToggle">
-          <IoClose />
+          {/* <IoClose /> */}
         </div>
         <li style={{ "--i": 0, "--clr": "#F15B26" }}>
           <Link to="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Ffamilycenter.instagram.com%2Finvite%2Fp%2FUQ4KtJFka321kKbKQA0orEvY_rmQFvj4df8o4%2F%3F__coig_login%3D1" onMouseEnter={handleHover} className="group innerA">
