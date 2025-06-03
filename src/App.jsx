@@ -99,7 +99,7 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayOut />}>i
+      <Route path="/" element={<RootLayOut />}>
         <Route index element={<Home />} />
         <Route path="/product" element={<AllProduct />} />
         <Route path="/contact" element={<ContactForm />} />
