@@ -15,7 +15,10 @@ body {
   position: relative;
   display: inline-block;
   z-index: 0;
-  border-radius: 9999px !important; 
+  border-radius: 9999px !important;
+}
+.gemini-thin-border.middlle {
+  border-radius: 0px !important;
 }
 
 .gemini-thin-border::before {
@@ -48,7 +51,9 @@ body {
   box-sizing: border-box;
   z-index: -1;
 }
-
+.gemini-thin-border.middlle::before {
+  border-radius: 0px important; /* Ensures the border is squared */
+}
 @keyframes borderMove {
   0% {
     background-position: 0% 50%;
