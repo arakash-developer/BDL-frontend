@@ -21,7 +21,7 @@ const Navbar = ({ className, click, menu }) => {
       className={`${className} flex items-center justify-between h-[4%] md:rounded-b-2xl relative z-30`}
     >
       <Link
-        className="!flex items-center justify-center  bg-[#000000] w-[180px] h-[40px] rounded-[5px] text-xs relative gemini-thin-border"
+        className="!flex items-center justify-center  bg-[#000000] w-[180px] h-[40px] !rounded-full text-xs relative gemini-thin-border"
         to="/"
       >
         <img
@@ -63,7 +63,7 @@ const Navbar = ({ className, click, menu }) => {
           </div>
         </Marquee>
       </div>
-      <div className=" bg-[#000000] w-[180px] h-[40px] rounded-[5px] relative flex justify-center items-center gemini-thin-border">
+      <div className=" bg-[#000000] w-[175px] h-[40px] !rounded-full relative flex justify-center items-center gemini-thin-border">
         {menu ? (
           <div
             className="w-full h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
