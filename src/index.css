@@ -10,3 +10,53 @@ body {
   height: 100%;
   scroll-behavior: smooth;
 }
+
+.gemini-thin-border {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  border-radius: 4px;
+}
+
+.gemini-thin-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00f5,
+    #ff0000
+  );
+  background-size: 300% 300%;
+  animation: borderMove 5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px; /* controls thickness */
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
