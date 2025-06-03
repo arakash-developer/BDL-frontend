@@ -17,9 +17,7 @@ body {
   z-index: 0;
   border-radius: 9999px !important;
 }
-.gemini-thin-border.middlle {
-  border-radius: 0px !important;
-}
+
 
 .gemini-thin-border::before {
   content: "";
@@ -51,9 +49,7 @@ body {
   box-sizing: border-box;
   z-index: -1;
 }
-.gemini-thin-border.middlle::before {
-  border-radius: 0px important; /* Ensures the border is squared */
-}
+
 @keyframes borderMove {
   0% {
     background-position: 0% 50%;
@@ -64,4 +60,44 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+
+
+.gemini-thin2 {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  border-radius: 0 !important;
+}
+
+.gemini-thin2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid transparent;
+  border-radius: 0 !important; /* No border-radius */
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00f5,
+    #ff0000
+  );
+  background-size: 300% 300%;
+  animation: borderMove 5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  box-sizing: border-box;
+  z-index: -1;
 }

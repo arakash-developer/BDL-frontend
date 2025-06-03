@@ -30,7 +30,7 @@ const Navbar = ({ className, click, menu }) => {
           alt=""
         />
       </Link>
-      <div className="gemini-thin-border bg-[#000000] h-full gemini-thin-border middlle flex items-center justify-center !rounded-0">
+      <div className="gemini-thin-border bg-[#000000] h-full gemini-thin2  flex items-center justify-center !rounded-0">
         <Marquee
           speed={20}
           direction="left"
