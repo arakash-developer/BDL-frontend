@@ -187,7 +187,7 @@ const Menu = () => {
         <div className="flex items-center justify-between h-7 bg-[#000000] ">
    
           <div className="flex items-center h-7">
-            <Navbar className="h-full"  click={handleToggle} menu={true}/>
+            <Navbar className="h-[180%]"  click={handleToggle} menu={true}/>
           </div>
           {/* <div className="flex items-center h-7">
               {activeImages.map((image, index) => (
