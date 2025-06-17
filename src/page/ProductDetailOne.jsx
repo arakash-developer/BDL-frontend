@@ -1,4 +1,4 @@
-import { Button, Form, Image, Input, Modal, Spin } from "antd";
+import { Button, Form, Image, Input, Modal, Spin, message } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { IoEyeOff } from "react-icons/io5";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -64,6 +64,24 @@ function ProductDetailOne() {
     }
     fetchRecentWorks();
   }, [subSeriesID]);
+
+  // Add this effect at the beginning to check for products
+  useEffect(() => {
+    const checkProducts = async () => {
+      try {
+        let res = await axios.get(`/series/group/${id}`);
+        if (!res.data || res.data.length === 0) {
+          message.error("No products found for this category");
+          navigate("/menu");
+        }
+      } catch (error) {
+        message.error("Error loading products");
+        navigate("/menu");
+      }
+    };
+
+    checkProducts();
+  }, [id, navigate]);
 
   const bdlSeries = async () => {
     try {
@@ -161,9 +179,7 @@ function ProductDetailOne() {
           item.series.includes(searchParams.get("series"))
         );
         const recentWorksWithImage = recentWorks.flatMap((item) => {
-          return item.images.map(
-            (image) => `${serverUrl}/${image}`
-          );
+          return item.images.map((image) => `${serverUrl}/${image}`);
         });
         const recentWorksWithVideo = recentWorks.flatMap((item) => {
           return item.videos.map((video) => {
