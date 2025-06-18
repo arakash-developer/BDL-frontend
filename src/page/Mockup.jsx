@@ -33,7 +33,7 @@ const Mockup = () => {
       try {
         setRecentWorkLoading(true);
         const response = await axios.get(
-          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=6&page=${recentWorkPage}`
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=8&page=${recentWorkPage}`
         );
         // Access the data property of the response
         const data = response.data.data;
@@ -219,7 +219,7 @@ const Mockup = () => {
               Recent work
             </h3>
             <div
-              className="h-[274px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
+              className="h-[70%] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
               onScroll={handleRecentWorkScroll}
             >
               {recentWorks &&
