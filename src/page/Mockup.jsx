@@ -189,7 +189,7 @@ const Mockup = () => {
     <div className="h-screen pb-9  bg-gray-100">
       <Navbar />
 
-      <div className="h-[97%] grid grid-rows-2 grid-cols-1">
+      <div className="h-[94%] grid grid-rows-2 grid-cols-1">
         {/* Main Display Section */}
         <div className="">
           {searchParams.get("type") === "video" && (
