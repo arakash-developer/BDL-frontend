@@ -219,7 +219,7 @@ const Mockup = () => {
               Recent work
             </h3>
             <div
-              className="h-[405px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
+              className="h-[345px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
               onScroll={handleRecentWorkScroll}
             >
               {recentWorks &&
