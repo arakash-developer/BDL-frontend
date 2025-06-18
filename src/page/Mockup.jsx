@@ -248,7 +248,7 @@ const Mockup = () => {
               Mockup zone
             </h3>
             <div
-              className="h-[274px]  grid grid-cols-3 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
+              className="h-[345px]  grid grid-cols-3 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
               onScroll={handleScroll}
             >
               {shuffledContent.map((item) => (
