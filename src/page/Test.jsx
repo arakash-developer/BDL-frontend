@@ -60,7 +60,7 @@ const Test = () => {
   const [productsToShow, setProductsToShow] = useState();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   useEffect(() => {
     fetchProduct();
   }, [id]);
