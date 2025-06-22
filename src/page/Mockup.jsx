@@ -214,7 +214,7 @@ const Mockup = () => {
 
       <div className="flex-grow flex flex-col">
         {/* Main Display Section */}
-        <div className="flex-1">
+        <div className="h-[40vh] bg-black">
           {searchParams.get("type") === "video" && (
             <video
               className="w-full h-full object-cover"
@@ -235,7 +235,7 @@ const Mockup = () => {
         </div>
 
         {/* Thumbnail Section */}
-        <div className="grid grid-cols-4 gap-4 p-2">
+        <div className="mt-[55px] grid grid-cols-4 gap-4 p-2">
           {/* Recent work section */}
           <div className="col-span-1">
             <h3 className="mb-3 text-xs bg-[#F15B26] sticky top-0 left-0 py-1.5 text-center text-white font-bold w-full shadow-md rounded-b">
