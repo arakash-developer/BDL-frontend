@@ -23,6 +23,8 @@ const Mockup = () => {
   const [videoPage, setVideoPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [noMoreImages, setNoMoreImages] = useState(false);
+  const [noMoreVideos, setNoMoreVideos] = useState(false);
   const [recentWorkPage, setRecentWorkPage] = useState(1);
   const [recentWorkLoading, setRecentWorkLoading] = useState(false);
   const [hasMoreRecentWorks, setHasMoreRecentWorks] = useState(true);
@@ -101,9 +103,24 @@ const Mockup = () => {
         );
         const data = await response.json();
 
-        if (!data.images.length && !data.videos.length) {
+        // Check if both images and videos are empty
+        if (!data.images || !data.videos) {
+          console.error("Invalid API response format:", data);
           setHasMore(false);
           return;
+        }
+
+        // Track if we've received new images or videos
+        const receivedNewImages = data.images.length > 0;
+        const receivedNewVideos = data.videos.length > 0;
+
+        // Update our flags for whether there are more images or videos
+        if (!receivedNewImages) setNoMoreImages(true);
+        if (!receivedNewVideos) setNoMoreVideos(true);
+
+        // If we have no more images AND no more videos, set hasMore to false
+        if (!receivedNewImages && !receivedNewVideos) {
+          setHasMore(false);
         }
 
         if (!searchParams.get("src") && data.images[0]) {
@@ -124,12 +141,16 @@ const Mockup = () => {
           return [...imagesWithType, ...videosWithType];
         });
 
-        setSingleMockupZoneImages((prev) => [
-          ...prev,
-          ...combinedSingleContent,
-        ]);
+        // Only add new content if we received any
+        if (combinedSingleContent.length > 0) {
+          setSingleMockupZoneImages((prev) => [
+            ...prev,
+            ...combinedSingleContent,
+          ]);
+        }
       } catch (error) {
         console.error("Error fetching mockup data:", error);
+        setHasMore(false);
       } finally {
         setLoading(false);
       }
@@ -161,9 +182,15 @@ const Mockup = () => {
 
   const handleScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
-    if (scrollHeight - scrollTop <= clientHeight * 1.1 && !loading && hasMore) {
-      setImagePage((prev) => prev + 1);
-      setVideoPage((prev) => prev + 1);
+    // Load more content when user is near the bottom (within 10% of the bottom)
+    if (
+      scrollHeight - scrollTop <= clientHeight * 1.1 &&
+      !loading &&
+      hasMore
+    ) {
+      // Only increment the pages that still have content
+      if (!noMoreImages) setImagePage((prev) => prev + 1);
+      if (!noMoreVideos) setVideoPage((prev) => prev + 1);
     }
   };
 
@@ -186,12 +213,12 @@ const Mockup = () => {
   }
 
   return (
-    <div className="h-screen pb-9  bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar />
 
-      <div className="h-[95%] grid grid-rows-2 grid-cols-1">
+      <div className="flex-grow flex flex-col">
         {/* Main Display Section */}
-        <div className="">
+        <div className="flex-1">
           {searchParams.get("type") === "video" && (
             <video
               className="w-full h-full object-cover"
@@ -284,7 +311,8 @@ const Mockup = () => {
           </div>
         </div>
       </div>
-      <Footer />
+
+      <Footer className="mt-auto" />
     </div>
   );
 };
