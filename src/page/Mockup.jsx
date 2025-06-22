@@ -183,11 +183,7 @@ const Mockup = () => {
   const handleScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
     // Load more content when user is near the bottom (within 10% of the bottom)
-    if (
-      scrollHeight - scrollTop <= clientHeight * 1.1 &&
-      !loading &&
-      hasMore
-    ) {
+    if (scrollHeight - scrollTop <= clientHeight * 1.1 && !loading && hasMore) {
       // Only increment the pages that still have content
       if (!noMoreImages) setImagePage((prev) => prev + 1);
       if (!noMoreVideos) setVideoPage((prev) => prev + 1);
