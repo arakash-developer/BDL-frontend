@@ -99,7 +99,7 @@ const Mockup = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=18&videoLimit=1`
+          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=18&videoLimit=3`
         );
         const data = await response.json();
 
@@ -214,7 +214,7 @@ const Mockup = () => {
 
       <div className="flex-grow flex flex-col">
         {/* Main Display Section */}
-        <div className="h-[40vh] bg-black">
+        <div className="h-[50vh] bg-black">
           {searchParams.get("type") === "video" && (
             <video
               className="w-full h-full object-cover"
