@@ -35,7 +35,7 @@ const Mockup = () => {
       try {
         setRecentWorkLoading(true);
         const response = await axios.get(
-          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=10&page=${recentWorkPage}`
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=18&page=${recentWorkPage}`
         );
         // Access the data property of the response
         const data = response.data.data;
