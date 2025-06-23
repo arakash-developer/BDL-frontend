@@ -35,7 +35,7 @@ const Mockup = () => {
       try {
         setRecentWorkLoading(true);
         const response = await axios.get(
-          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=8&page=${recentWorkPage}`
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=10&page=${recentWorkPage}`
         );
         // Access the data property of the response
         const data = response.data.data;
@@ -99,7 +99,7 @@ const Mockup = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=15&videoLimit=6`
+          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=18&videoLimit=1`
         );
         const data = await response.json();
 
