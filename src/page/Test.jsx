@@ -101,10 +101,8 @@ const Test = () => {
     try {
       const res = await axios.get(
         `/products/${seletedproduct?.subSeries ? "sub-series" : "series"}/${
-          seletedproduct?.subSeries
-            ? seletedproduct?.subSeries._id
-            : seletedproduct?.series._id
-        }`
+          seletedproduct?.subSeries ? seletedproduct?.subSeries._id : seletedproduct?.series._id
+        }`,
       );
       if (res.status === 200) {
         setProductsToShow(res.data);
@@ -125,13 +123,9 @@ const Test = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `/specifications/${
-          seletedproduct.subSeries ? "sub-series" : "series"
-        }/${
-          seletedproduct.subSeries
-            ? seletedproduct.subSeries._id
-            : seletedproduct.series._id
-        }`
+        `/specifications/${seletedproduct.subSeries ? "sub-series" : "series"}/${
+          seletedproduct.subSeries ? seletedproduct.subSeries._id : seletedproduct.series._id
+        }`,
       );
       if (res.status === 200) {
         setLoading(false);
@@ -161,8 +155,7 @@ const Test = () => {
                     {productsToShow?.map((product) => (
                       <div
                         key={product.id}
-                        className="bg-[#8ac249] p-1 shadow-md rounded flex items-center justify-center"
-                      >
+                        className="bg-[#8ac249] p-1 shadow-md rounded flex items-center justify-center">
                         <Image
                           src={`${serverUrl}/${product.image}`}
                           className="!w-full !h-14 object-contain "
@@ -171,15 +164,10 @@ const Test = () => {
                     ))}
                   </div>
                   <div className="col-span-1  pt-1">
-                    {specification?.dimming.length > 0 ||
-                    specification?.thickness ? (
+                    {specification?.dimming.length > 0 || specification?.thickness ? (
                       <SpecificationItem
                         sItemClass="h-1/2 w-full"
-                        title={
-                          specification?.dimming.length > 0
-                            ? "Dimming"
-                            : "Thickness"
-                        }
+                        title={specification?.dimming.length > 0 ? "Dimming" : "Thickness"}
                         data={
                           specification?.dimming.length > 0
                             ? specification?.dimming
@@ -203,22 +191,8 @@ const Test = () => {
                       <SpecificationItem
                         sItemClass="h-1/2 w-full"
                         title={specification?.cct.length > 0 ? "CCT" : "Shape"}
-                        data={
-                          specification?.cct.length > 0
-                            ? specification?.cct
-                            : specification?.shape
-                        }
-                        items={[
-                          "8000K",
-                          "7500K",
-                          "6500K",
-                          "5000K",
-                          "4000K",
-                          "3000K",
-                          "2700K",
-                          "2000K",
-                          "+",
-                        ]}
+                        data={specification?.cct.length > 0 ? specification?.cct : specification?.shape}
+                        items={["8000K", "7500K", "6500K", "5000K", "4000K", "3000K", "2700K", "2000K", "+"]}
                       />
                     ) : (
                       ""
@@ -231,54 +205,34 @@ const Test = () => {
 
           {specification && (
             <div className="h-[16%] bg-gray-100 flex justify-end ">
-              <SpecificationItem
-                sItemClass="h-full w-full"
-                title={
-                  specification?.mounting_array.length > 0
-                    ? "Mounting"
-                    : "Capacity"
-                }
-                data={
-                  specification?.mounting_array.length > 0
-                    ? specification?.mounting_array
-                    : specification?.capacity
-                }
-                items={[
-                  "Surface",
-                  "Recessed",
-                  "Base Plate",
-                  "Pendant",
-                  "F-Standing",
-                  "+",
-                ]}
-              />
+              {specification?.mounting_array.length > 0 || specification?.capacity ? (
+                <SpecificationItem
+                  sItemClass="h-full w-full"
+                  title={specification?.mounting_array.length > 0 ? "Mounting" : "Capacity"}
+                  data={
+                    specification?.mounting_array.length > 0
+                      ? specification?.mounting_array
+                      : specification?.capacity
+                  }
+                  items={["Surface", "Recessed", "Base Plate", "Pendant", "F-Standing", "+"]}
+                />
+              ) : (
+                ""
+              )}
 
               <SpecificationItem
                 sItemClass="h-full w-full"
-                title={
-                  specification?.rimColor.length > 0 ? "Rim Color" : "Protocol"
-                }
-                data={
-                  specification?.rimColor.length > 0
-                    ? specification?.rimColor
-                    : specification?.protocol
-                }
+                title={specification?.rimColor.length > 0 ? "Rim Color" : "Protocol"}
+                data={specification?.rimColor.length > 0 ? specification?.rimColor : specification?.protocol}
                 items={["White", "Black", "Chrome", "Rose Gold", "+"]}
               />
 
-              {specification?.bodyColor.length > 0 ||
-              specification?.mounting ? (
+              {specification?.bodyColor.length > 0 || specification?.mounting ? (
                 <SpecificationItem
                   sItemClass="h-full w-full"
-                  title={
-                    specification?.bodyColor.length > 0
-                      ? "Body Color"
-                      : "Mounting"
-                  }
+                  title={specification?.bodyColor.length > 0 ? "Body Color" : "Mounting"}
                   data={
-                    specification?.bodyColor.length > 0
-                      ? specification?.bodyColor
-                      : specification?.mounting
+                    specification?.bodyColor.length > 0 ? specification?.bodyColor : specification?.mounting
                   }
                   items={["White", "Black", "Gold", "Chrome", "Rose Gold", "+"]}
                 />
@@ -288,14 +242,8 @@ const Test = () => {
               {specification?.glare.length > 0 || specification?.finish ? (
                 <SpecificationItem
                   sItemClass="h-full w-full"
-                  title={
-                    specification?.glare.length > 0 ? "Glare/UGI" : "Finish"
-                  }
-                  data={
-                    specification?.glare.length > 0
-                      ? specification?.glare
-                      : specification?.finish
-                  }
+                  title={specification?.glare.length > 0 ? "Glare/UGI" : "Finish"}
+                  data={specification?.glare.length > 0 ? specification?.glare : specification?.finish}
                   items={["Lens", "Parabolic", "Honeycomb", "+"]}
                 />
               ) : (
@@ -305,7 +253,7 @@ const Test = () => {
           )}
           {specification && (
             <div className="h-[16%] bg-gray-100 flex-row-reverse flex justify-end">
-              {specification?.lumens.length > 0 && specification?.watts ? (
+              {specification?.lumens.length > 0 || specification?.watts ? (
                 <div className="w-full h-full bg-[#d6cbb4] flex flex-col justify-between">
                   {specification?.lumens.length > 0 && (
                     <SpecificationItem
@@ -330,11 +278,7 @@ const Test = () => {
                 <SpecificationItem
                   sItemClass="w-full"
                   title={specification?.cri.length > 0 ? "CRI" : "Dimention"}
-                  data={
-                    specification?.cri.length > 0
-                      ? specification?.cri
-                      : specification?.dimention
-                  }
+                  data={specification?.cri.length > 0 ? specification?.cri : specification?.dimention}
                   items={["<80", ">80", ">90", ">92", ">95", ">97", "+"]}
                 />
               ) : (
@@ -353,11 +297,7 @@ const Test = () => {
               <SpecificationItem
                 sItemClass="w-full"
                 title={specification?.ip.length > 0 ? "IP" : "Customization"}
-                data={
-                  specification?.ip.length > 0
-                    ? specification?.ip
-                    : specification?.customization
-                }
+                data={specification?.ip.length > 0 ? specification?.ip : specification?.customization}
                 items={["20", "40", "65", "66", "67", "68", "+"]}
               />
             </div>
@@ -394,14 +334,9 @@ const Test = () => {
       ) : (
         <div className="h-screen w-full flex-col flex justify-center items-center bg-gray-800 ">
           <p className="text-center px-3 text-yellow-300">
-            No specification to show. Please contact with product manager to
-            know information
+            No specification to show. Please contact with product manager to know information
           </p>
-          <Button
-            icon={<IoIosArrowBack />}
-            onClick={() => history.back()}
-            className="mt-3"
-          >
+          <Button icon={<IoIosArrowBack />} onClick={() => history.back()} className="mt-3">
             Back
           </Button>
         </div>
