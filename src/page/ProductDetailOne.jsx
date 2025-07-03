@@ -41,6 +41,8 @@ function ProductDetailOne() {
     form.resetFields();
   };
 
+  const seriesId = searchParams.get("series");
+
   // Fetch series data
   useEffect(() => {
     bdlSeries();
@@ -95,9 +97,7 @@ function ProductDetailOne() {
 
       if (seriesByGroupId.length > 0) {
         setSeriseID(searchParams.get("series"));
-        getProductsBySeries(
-          searchParams.get("series") || seriesByGroupId[0]._id
-        );
+        getProductsBySeries(searchParams.get("series") || seriesByGroupId[0]._id);
       }
     } catch (error) {
       console.error("Error fetching the series data:", error);
@@ -175,8 +175,9 @@ function ProductDetailOne() {
     try {
       let res = await axios.get("/recent-works");
       if (res.status === 200) {
-        const recentWorks = res.data.filter((item) =>
-          item.series.includes(searchParams.get("series"))
+        // const recentWorks = res.data.filter((item) => item.series.includes(seriesId));
+        const recentWorks = res.data.filter(
+          (item) => Array.isArray(item.series) && item.series.includes(seriesId),
         );
         const recentWorksWithImage = recentWorks.flatMap((item) => {
           return item.images.map((image) => `${serverUrl}/${image}`);
@@ -233,8 +234,7 @@ function ProductDetailOne() {
                 onClick={() => {
                   console.log(product);
                   handleProductClick(product);
-                }}
-              >
+                }}>
                 <img
                   src={`${serverUrl}/${product.image}`}
                   className="w-full h-11 object-contain"
@@ -293,8 +293,7 @@ function ProductDetailOne() {
                           console.log("bodys");
                         }}
                         key={subItem._id}
-                        className="flex flex-col my-1 border"
-                      >
+                        className="flex flex-col my-1 border">
                         <img
                           onClick={(e) => {
                             e.stopPropagation();
@@ -327,18 +326,13 @@ function ProductDetailOne() {
                   alt={displayedProduct.itemCode}
                 />
               ) : (
-                <p className="text-[yellow] text-sm font-semibold">
-                  This series product is not available
-                </p>
+                <p className="text-[yellow] text-sm font-semibold">This series product is not available</p>
               )}
             </div>
             <div
               style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
-              className="border-l border-[#ffffff60] col-span-1 row-span-5  flex flex-col items-center justify-center"
-            >
-              <h2 className="text-white font-semibold text-sm">
-                {displayedProduct?.series}
-              </h2>
+              className="border-l border-[#ffffff60] col-span-1 row-span-5  flex flex-col items-center justify-center">
+              <h2 className="text-white font-semibold text-sm">{displayedProduct?.series}</h2>
             </div>
             <div className="p-0.5 shadow-lg backdrop-filter border border-black/10 border-r-0 border-opacity-30 col-span-8 grid grid-cols-4 gap-0.5 text-[10px]">
               <div>
@@ -359,8 +353,7 @@ function ProductDetailOne() {
                   if (!authUser?.user) {
                     setIsModalVisible(true);
                   }
-                }}
-              >
+                }}>
                 <p className="bg-black h-1/2 text-[#cc3903] font-bold flex justify-center items-center">
                   MRP
                 </p>
@@ -399,14 +392,8 @@ function ProductDetailOne() {
                   <div
                     key={item}
                     className="bg-slate-400 rounded-l-md overflow-hidden"
-                    onClick={() => setSeletedImage(item)}
-                  >
-                    <img
-                      className="w-full h-full object-cover"
-                      src={item}
-                      alt=""
-                      loading="lazy"
-                    />
+                    onClick={() => setSeletedImage(item)}>
+                    <img className="w-full h-full object-cover" src={item} alt="" loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -421,14 +408,8 @@ function ProductDetailOne() {
                     className="bg-slate-400 rounded-md overflow-hidden"
                     onClick={() => {
                       setSeletedVideo(item);
-                    }}
-                  >
-                    <img
-                      className="w-full h-full object-cover"
-                      src={item?.thumbnail}
-                      alt=""
-                      loading="lazy"
-                    />
+                    }}>
+                    <img className="w-full h-full object-cover" src={item?.thumbnail} alt="" loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -441,10 +422,7 @@ function ProductDetailOne() {
                   <video
                     loading="lazy"
                     className="w-full h-full object-cover"
-                    src={
-                      seletedVideo?.video ||
-                      refaranceImageAndVideo?.video[0]?.video
-                    }
+                    src={seletedVideo?.video || refaranceImageAndVideo?.video[0]?.video}
                     alt=""
                     muted
                     controls
@@ -466,19 +444,12 @@ function ProductDetailOne() {
         footer={null} // Remove the default footer buttons
       >
         {/* Login Form */}
-        <Form
-          form={form}
-          name="loginForm"
-          layout="vertical"
-          onFinish={handleLogin}
-          maskChanging={false}
-        >
+        <Form form={form} name="loginForm" layout="vertical" onFinish={handleLogin} maskChanging={false}>
           {/* Email Input */}
           <Form.Item
             label="Email"
             name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
-          >
+            rules={[{ required: true, message: "Please input your email!" }]}>
             <Input type="email" placeholder="Enter your email" />
           </Form.Item>
 
@@ -486,8 +457,7 @@ function ProductDetailOne() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
+            rules={[{ required: true, message: "Please input your password!" }]}>
             <Input.Password placeholder="Enter your password" />
           </Form.Item>
 
