@@ -184,7 +184,7 @@ const Menu = () => {
           <MenuIcon className={`${show ? "flex" : "hidden"}`} />
         </div>
         <div className="flex items-center justify-between h-7 bg-[#000000] ">
-          <div className="flex items-center h-9">
+          <div className="flex items-center">
             <Navbar className="h-full" click={handleToggle} menu={true} />
           </div>
         </div>

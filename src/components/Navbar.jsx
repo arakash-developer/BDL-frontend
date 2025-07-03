@@ -17,70 +17,81 @@ const Navbar = ({ className, click, menu }) => {
   }, []);
 
   return (
-    <div
-      className={`${className} flex items-center justify-between h-[4%] md:rounded-b-2xl relative z-30`}
-    >
-      <Link
-        className="!flex items-center justify-center  bg-[#000000] w-[180px] h-[40px] !rounded-full text-xs relative gemini-thin-border"
-        to="/"
-      >
-        <img
-          className="h-[25px] w-[30px] drop-shadow-custom"
-          src="/assets/bdl.png"
-          alt=""
-        />
-      </Link>
-      <div className="gemini-thin-border bg-[#000000] h-full gemini-thin2  flex items-center justify-center !rounded-0">
-        <Marquee
-          speed={20}
-          direction="left"
-          pauseOnHover={true}
-          reverse={true}
-          gradient={false}
-          gradientColor={["#6FA710"]}
-          className="h-full"
-        >
+    <nav className={`${className} relative z-30 w-full h-[50px]`}>
+      {/* Content Container */}
+      <div className="relative w-full h-full max-w-6xl mx-auto">
+        <div className="relative z-10 flex items-center justify-between h-full bg-slate-800/90 backdrop-blur-sm">
+          {/* Logo Section - Left */}
+          <Link
+            to="/"
+            className="group flex items-center space-x-3 px-4 py-[2px] bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 "
+            aria-label="BDL Home">
+            <img className="h-10 w-10 object-contain" src="/assets/bdl.png" alt="BDL Logo" />
+            <span className="text-white font-semibold text-sm hidden sm:block group-hover:text-blue-200 transition-colors">
+              BDL
+            </span>
+          </Link>
+
+          {/* Center Marquee Section */}
+          <div className="flex-1 mx-1 h-10 bg-white/5 backdrop-blur-sm overflow-hidden">
+            <Marquee
+              speed={30}
+              direction="left"
+              pauseOnHover={true}
+              reverse={true}
+              gradient={true}
+              gradientColor={["rgba(0,0,0,0.1)", "transparent"]}
+              className="h-full">
+              <div className="flex items-center px-4">
+                {greetings.length > 0
+                  ? greetings
+                      .filter((greeting) => greeting.status === "active")
+                      .map((greeting) => (
+                        <img
+                          key={greeting._id}
+                          className="h-[42px] w-auto object-contain filter brightness-110 hover:brightness-125 transition-all duration-300"
+                          src={`${serverUrl}/${greeting.image}`}
+                          alt={greeting.title}
+                        />
+                      ))
+                  : // Fallback with better spacing
+                    Array(3)
+                      .fill(0)
+                      .map((_, index) => (
+                        <img
+                          key={index}
+                          className="h-[40px] w-auto object-contain filter brightness-110"
+                          src={slogan}
+                          alt="BDL Slogan"
+                        />
+                      ))}
+              </div>
+            </Marquee>
+          </div>
+
+          {/* Menu Section - Right */}
           <div className="flex items-center">
-            {greetings.length > 0 ? (
-              greetings
-                .filter((greeting) => greeting.status === "active")
-                .map((greeting) => (
-                  <img
-                    key={greeting._id}
-                    className="h-7"
-                    src={`${serverUrl}/${greeting.image}`}
-                    alt={greeting.title}
-                  />
-                ))
+            {menu ? (
+              <button
+                onClick={click}
+                className="group flex items-center space-x-2 px-5 py-3  bg-orange-500/90 hover:bg-orange-500 border border-orange-400/50 text-white transition-all duration-300 focus:outline-none"
+                aria-label="Close Menu">
+                <HiDotsHorizontal className="text-lg group-hover:rotate-90 transition-transform duration-300" />
+                <span className="text-sm font-medium hidden sm:block">Close</span>
+              </button>
             ) : (
-              // Fallback in case data is not yet loaded
-              <>
-                <img className="h-7" src={slogan} alt="slogan" />
-                <img className="h-7" src={slogan} alt="slogan" />
-                <img className="h-7" src={slogan} alt="slogan" />
-              </>
+              <Link
+                to="/menu"
+                className="group flex items-center space-x-2 px-[23px] py-3  bg-orange-500/90 hover:bg-orange-500 border border-orange-400/50 text-white transition-all duration-300 focus:outline-none"
+                aria-label="Open Menu">
+                <AiOutlineProduct className="text-lg group-hover:rotate-12 transition-transform duration-300" />
+                <span className="text-sm font-medium hidden sm:block">Menu</span>
+              </Link>
             )}
           </div>
-        </Marquee>
+        </div>
       </div>
-      <div className=" bg-[#000000] w-[175px] h-[40px] !rounded-full relative flex justify-center items-center gemini-thin-border">
-        {menu ? (
-          <div
-            className="w-full h-full flex justify-center items-center  text-[#F15B26]  cursor-pointer"
-            onClick={click}
-          >
-            <HiDotsHorizontal className="text-xl" />
-          </div>
-        ) : (
-          <Link
-            className="w-full h-full flex justify-center items-center text-[#F15B26]"
-            to="/menu"
-          >
-            <AiOutlineProduct className="text-xl" />
-          </Link>
-        )}
-      </div>
-    </div>
+    </nav>
   );
 };
 

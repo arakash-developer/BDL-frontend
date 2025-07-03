@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "../axios";
 
 const MockupZones = () => {
-  let serverUrl = import.meta.env.VITE_SERVER_URL; 
+  let serverUrl = import.meta.env.VITE_SERVER_URL;
   let navigate = useNavigate();
 
   // Slider settings
@@ -30,7 +30,7 @@ const MockupZones = () => {
         let res = await axios.get("/mokupzone-banner");
         if (res.status === 200) {
           setZones(res.data);
-          console.log("Mockup Zones Data:",res.data);
+          console.log("Mockup Zones Data:", res.data);
         }
       } catch (error) {
         console.error("Error fetching mockup -:", error);
@@ -46,13 +46,9 @@ const MockupZones = () => {
   };
 
   return (
-    <Slider className="h-[48%] w-screen" {...settings}>
+    <Slider className="h-[47%] w-screen" {...settings}>
       {zones?.map((zone, index) => (
-        <div
-          className="flex-1"
-          key={index}
-          onClick={() => handleImageClick(zone)}
-        >
+        <div className="flex-1" key={index} onClick={() => handleImageClick(zone)}>
           <div key={index} className="h-full">
             <img
               className="image h-full w-full object-cover"

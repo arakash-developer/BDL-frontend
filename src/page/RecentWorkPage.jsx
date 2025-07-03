@@ -45,7 +45,7 @@ const RecentWork = () => {
       try {
         setRecentWorkLoading(true);
         const response = await axios.get(
-          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=18&page=${recentWorkPage}`
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=18&page=${recentWorkPage}`,
         );
 
         // Access the data property of the response
@@ -166,8 +166,7 @@ const RecentWork = () => {
 
     // Check if we're near bottom (within 20% of bottom)
     const scrollThreshold = 0.8;
-    const isNearBottom =
-      scrollHeight - scrollTop <= clientHeight / scrollThreshold;
+    const isNearBottom = scrollHeight - scrollTop <= clientHeight / scrollThreshold;
 
     if (isNearBottom && !recentWorkLoading && hasMoreRecentWorks) {
       console.log("Loading more recent works, page:", recentWorkPage + 1);
@@ -180,9 +179,9 @@ const RecentWork = () => {
   }
 
   return (
-    <div className="h-screen pb-9 bg-gray-100">
+    <div className="h-screen pb-9 bg-gray-100 flex flex-col justify-between relative">
       <Navbar />
-      <div className="h-[97%] grid grid-rows-2 grid-cols-1">
+      <div className="h-[95%] grid grid-rows-2 grid-cols-1">
         {/* Main display section */}
         <div>
           {searchParams.get("type") === "video" && (
@@ -191,9 +190,7 @@ const RecentWork = () => {
               controls
               autoPlay
               muted
-              src={`${serverUrl}/${
-                searchParams.get("src") || selectedContent.src
-              }`}
+              src={`${serverUrl}/${searchParams.get("src") || selectedContent.src}`}
             />
           )}
           {searchParams.get("type") === "image" && (
@@ -201,9 +198,7 @@ const RecentWork = () => {
               height="100%"
               width="100%"
               className="!w-full h-full object-cover"
-              src={`${serverUrl}/${
-                searchParams.get("src") || selectedContent.src
-              }`}
+              src={`${serverUrl}/${searchParams.get("src") || selectedContent.src}`}
               alt="Selected"
             />
           )}
@@ -214,8 +209,7 @@ const RecentWork = () => {
           {/* Recent Work section - add onScroll handler */}
           <div
             className="col-span-3 grid grid-cols-3 gap-2 h-full overflow-y-scroll no-scrollbar relative rounded-b"
-            onScroll={handleRecentWorkScroll}
-          >
+            onScroll={handleRecentWorkScroll}>
             <div className="col-span-3 bg-[#F15B26] sticky top-0 left-0 h-8 flex flex-col items-center w-full shadow-md rounded-b">
               <div className="w-full">
                 <div className="text-[11px] text-white font-bold capitalize w-full text-center">
@@ -267,9 +261,7 @@ const RecentWork = () => {
             )}
             {/* Message when no more content */}
             {!hasMoreRecentWorks && recentWorkPage > 1 && (
-              <div className="col-span-3 text-center py-2 text-gray-500 text-sm">
-                No more works to load
-              </div>
+              <div className="col-span-3 text-center py-2 text-gray-500 text-sm">No more works to load</div>
             )}
           </div>
 
@@ -282,8 +274,7 @@ const RecentWork = () => {
               <div
                 key={mockupItem.id}
                 onClick={() => handleImageClick(mockupItem)}
-                className="shadow-md rounded cursor-pointer"
-              >
+                className="shadow-md rounded cursor-pointer">
                 <img
                   src={`${serverUrl}/${mockupItem.images[0]}`}
                   className="w-full h-14 object-cover rounded"

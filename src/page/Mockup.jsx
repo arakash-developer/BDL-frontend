@@ -35,7 +35,7 @@ const Mockup = () => {
       try {
         setRecentWorkLoading(true);
         const response = await axios.get(
-          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=18&page=${recentWorkPage}`
+          `${serverUrl}/api/v1/recent-works/recentlimitwork?limit=18&page=${recentWorkPage}`,
         );
         // Access the data property of the response
         const data = response.data.data;
@@ -99,7 +99,7 @@ const Mockup = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=18&videoLimit=3`
+          `${serverUrl}/api/v1/mockup-zones/mockupzone-paginate/${id}?imagePage=${imagePage}&videoPage=${videoPage}&imageLimit=18&videoLimit=3`,
         );
         const data = await response.json();
 
@@ -143,10 +143,7 @@ const Mockup = () => {
 
         // Only add new content if we received any
         if (combinedSingleContent.length > 0) {
-          setSingleMockupZoneImages((prev) => [
-            ...prev,
-            ...combinedSingleContent,
-          ]);
+          setSingleMockupZoneImages((prev) => [...prev, ...combinedSingleContent]);
         }
       } catch (error) {
         console.error("Error fetching mockup data:", error);
@@ -192,11 +189,7 @@ const Mockup = () => {
 
   const handleRecentWorkScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
-    if (
-      scrollHeight - scrollTop <= clientHeight * 1.1 &&
-      !recentWorkLoading &&
-      hasMoreRecentWorks
-    ) {
+    if (scrollHeight - scrollTop <= clientHeight * 1.1 && !recentWorkLoading && hasMoreRecentWorks) {
       setRecentWorkPage((prev) => prev + 1);
     }
   };
@@ -214,7 +207,7 @@ const Mockup = () => {
 
       <div className="flex-grow flex flex-col">
         {/* Main Display Section */}
-        <div className="h-[50vh] bg-black">
+        <div className="h-[45vh] bg-black">
           {searchParams.get("type") === "video" && (
             <video
               className="w-full h-full object-cover"
@@ -243,15 +236,13 @@ const Mockup = () => {
             </h3>
             <div
               className="h-[345px] grid grid-cols-1 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
-              onScroll={handleRecentWorkScroll}
-            >
+              onScroll={handleRecentWorkScroll}>
               {recentWorks &&
                 recentWorks.map((work) => (
                   <div
                     key={work._id}
                     onClick={() => handleImageClick(work.images[0], work._id)}
-                    className="shadow-md rounded"
-                  >
+                    className="shadow-md rounded">
                     <img
                       src={`${serverUrl}/${work.images[0]}`}
                       className="w-full h-14 object-cover rounded"
@@ -259,9 +250,7 @@ const Mockup = () => {
                     />
                   </div>
                 ))}
-              {recentWorkLoading && (
-                <div className="text-center py-2 text-black">Loading...</div>
-              )}
+              {recentWorkLoading && <div className="text-center py-2 text-black">Loading...</div>}
             </div>
           </div>
 
@@ -272,8 +261,7 @@ const Mockup = () => {
             </h3>
             <div
               className="h-[345px]  grid grid-cols-3 gap-2 overflow-y-scroll no-scrollbar relative rounded-b"
-              onScroll={handleScroll}
-            >
+              onScroll={handleScroll}>
               {shuffledContent.map((item) => (
                 <div
                   key={item.id}
@@ -285,24 +273,17 @@ const Mockup = () => {
                     });
                     displayContent(
                       item.type,
-                      item.type === "video" ? item.video : item.src // Updated to use src for images
+                      item.type === "video" ? item.video : item.src, // Updated to use src for images
                     );
-                  }}
-                >
+                  }}>
                   <img
-                    src={`${serverUrl}/${
-                      item.type === "video" ? item.thumbnail : item.src
-                    } `} // Updated to use src for images
+                    src={`${serverUrl}/${item.type === "video" ? item.thumbnail : item.src} `} // Updated to use src for images
                     className="w-full h-14 object-cover rounded"
                     alt={item.type}
                   />
                 </div>
               ))}
-              {loading && (
-                <div className="col-span-3 text-center py-2 text-black">
-                  Loading...
-                </div>
-              )}
+              {loading && <div className="col-span-3 text-center py-2 text-black">Loading...</div>}
             </div>
           </div>
         </div>

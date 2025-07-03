@@ -31,7 +31,9 @@ const RecentWorks = () => {
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  let limit = 15;
+  let limit = 20;
+
+  console.log("works:", works);
   // Fetch recent works from API
   const fetchRecentWorks = async () => {
     try {
@@ -57,9 +59,7 @@ const RecentWorks = () => {
 
     setLoadingMore(true);
     try {
-      let res = await axios.get(
-        `/recent-works/recentlimitwork?limit=${limit}&page=${pageNumber}`
-      );
+      let res = await axios.get(`/recent-works/recentlimitwork?limit=${limit}&page=${pageNumber}`);
 
       const newData = res.data.data;
 
@@ -84,6 +84,7 @@ const RecentWorks = () => {
     try {
       let res = await axios.get("/recentWorkBanner");
       setRecentBanner(res.data);
+      console.log("Recent Banner:", res.data);
       // console.log("Recent Banner Data:", res.data);
     } catch (error) {
       console.error("Error fetching recent banner:", error);
@@ -192,8 +193,7 @@ const RecentWorks = () => {
   return (
     <div
       style={{ background: `url(${selectedRecentImage})` }}
-      className={`h-[48%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}
-    >
+      className={`h-[48%] !bg-cover grid grid-cols-5 grid-rows-5 gap-1 relative z-[1]`}>
       {/* {isPopupVisible && (
         <div
           ref={popupRef}
@@ -212,30 +212,24 @@ const RecentWorks = () => {
         </div>
       )} */}
       {isPopupVisible && (
-        <div
-          ref={popupRef}
-          className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#DCFCE7] p-4"
-        >
+        <div ref={popupRef} className="absolute top-0 left-0 w-full h-full z-[999999] bg-[#DCFCE7] p-4">
           <div className="relative w-full h-full">
             {/* Close button */}
             <button
               onClick={() => setPopupVisible(false)}
-              className="absolute -top-2 -right-2 z-10 bg-white hover:bg-gray-200 transition-colors duration-200 p-1.5 rounded-full shadow-lg"
-            >
+              className="absolute -top-2 -right-2 z-10 bg-white hover:bg-gray-200 transition-colors duration-200 p-1.5 rounded-full shadow-lg">
               <IoClose className="text-2xl text-[#8BC24A]" />
             </button>
 
             <div
               ref={containerRef}
               onScroll={handleScroll}
-              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-scroll pt-2 !h-[320px] no-scrollbar"
-            >
+              className="grid grid-cols-4 items-start justify-start gap-4 overflow-y-scroll pt-2 !h-[95%] no-scrollbar">
               {recentLimit.map((work, i) => (
                 <div
                   key={i}
                   onClick={() => handleImageClick(work.images[0], work._id)}
-                  className="aspect-square relative cursor-pointer hover:opacity-80 transition-opacity"
-                >
+                  className="aspect-square relative cursor-pointer hover:opacity-80 transition-opacity">
                   <img
                     className="h-full w-full object-cover"
                     src={`${serverUrl}/${work.images[0]}`}
@@ -246,15 +240,9 @@ const RecentWorks = () => {
                   </p>
                 </div>
               ))}
-              {loadingMore && (
-                <div className="col-span-4 text-center py-4 text-black">
-                  Loading more...
-                </div>
-              )}
+              {loadingMore && <div className="col-span-4 text-center py-4 text-black">Loading more...</div>}
               {!hasMore && (
-                <div className="col-span-4 text-center py-4 text-black">
-                  No more works to show
-                </div>
+                <div className="col-span-4 text-center py-4 text-black">No more works to show</div>
               )}
             </div>
           </div>
@@ -266,11 +254,7 @@ const RecentWorks = () => {
           {recentBanner
             .sort((a, b) => a.priority - b.priority)
             .map((work) => (
-              <div
-                onClick={() => handlerRecentGoto(work.recentWork)}
-                key={`${work._id}`}
-                className="h-full"
-              >
+              <div onClick={() => handlerRecentGoto(work.recentWork)} key={`${work._id}`} className="h-full">
                 <img
                   className="image h-full w-full object-cover"
                   src={`${serverUrl}/${work.image}`}
@@ -299,13 +283,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[0]?.images[0], works[0]?._id)}
         className={`one bg-red-400 relative cursor-pointer ${
           activeIndex >= 1 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500 `}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[0]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500 `}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[0]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[0]?.title}
@@ -316,28 +295,22 @@ const RecentWorks = () => {
         onClick={() => setPopupVisible(true)}
         className={`sixteen bg-rose-400 relative ${
           activeIndex >= 16 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        {/* <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[15]?.images[0]}`}
+        } transition-opacity duration-500`}>
+        <img
+          className="h-full w-full object-cover blur-sm"
+          src={`${serverUrl}/${works[7]?.images[0]}`}
           alt=""
-        /> */}
-        <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center cursor-pointer ">
-          1 To {allCount.recentWorkCount}
+        />
+        <p className="text-nowrap p-1 rounded-md text-xl bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-1/2 translate-y-1/2 text-white font-bold  text-center cursor-pointer ">
+          1 - {allCount.recentWorkCount}
         </p>
       </div>
       <div
         onClick={() => handleImageClick(works[14]?.images[0], works[14]?._id)}
         className={`fifteen bg-fuchsia-400 relative ${
           activeIndex >= 15 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[14]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[14]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[14]?.title}
@@ -347,13 +320,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[13]?.images[0], works[13]?._id)}
         className={`fourteen bg-emerald-400 relative cursor-pointer ${
           activeIndex >= 14 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[13]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[13]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[13]?.title}
@@ -363,13 +331,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[12]?.images[0], works[12]?._id)}
         className={`thirteen bg-amber-400 relative cursor-pointer ${
           activeIndex >= 13 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[12]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[12]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[12]?.title}
@@ -379,13 +342,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[1]?.images[0], works[1]?._id)}
         className={`two bg-blue-400 relative cursor-pointer ${
           activeIndex >= 2 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[1]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[1]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[1]?.title}
@@ -394,19 +352,13 @@ const RecentWorks = () => {
       <div
         className={`seventeen pointer-events-none bg-violet-400 col-span-3 row-span-3 ${
           activeIndex === 17 ? "opacity-0" : "opacity-0"
-        } transition-opacity duration-500`}
-      ></div>
+        } transition-opacity duration-500`}></div>
       <div
         onClick={() => handleImageClick(works[11]?.images[0], works[11]?._id)}
         className={`twelve bg-lime-400 relative cursor-pointer ${
           activeIndex >= 12 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[11]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[11]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[11]?.title}
@@ -416,13 +368,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[2]?.images[0], works[2]?._id)}
         className={`three bg-green-400 relative cursor-pointer ${
           activeIndex >= 3 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[2]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[2]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[2]?.title}
@@ -433,13 +380,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[10]?.images[0], works[10]?._id)}
         className={`eleven bg-cyan-400 relative cursor-pointer ${
           activeIndex >= 11 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[10]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[10]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[10]?.title}
@@ -450,13 +392,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[3]?.images[0], works[3]?._id)}
         className={`four bg-yellow-400 relative cursor-pointer ${
           activeIndex >= 4 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[3]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[3]?.images[0]}`} alt="" />
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[3]?.title}
         </p>
@@ -466,13 +403,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[9]?.images[0], works[9]?._id)}
         className={`ten bg-gray-400 relative cursor-pointer ${
           activeIndex >= 10 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[9]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[9]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[9]?.title}
@@ -482,13 +414,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[4]?.images[0], works[4]?._id)}
         className={`five bg-purple-400 relative cursor-pointer ${
           activeIndex >= 5 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[4]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[4]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[4]?.title}
@@ -499,13 +426,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[5]?.images[0], works[5]?._id)}
         className={`six bg-pink-400 relative cursor-pointer ${
           activeIndex >= 6 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[5]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[5]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[5]?.title}
@@ -515,13 +437,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[6]?.images[0], works[6]?._id)}
         className={`seven bg-indigo-400 relative cursor-pointer ${
           activeIndex >= 7 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[6]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[6]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[6]?.title}
@@ -531,13 +448,8 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[7]?.images[0], works[7]?._id)}
         className={`eight bg-violet-400 relative cursor-pointer ${
           activeIndex >= 8 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[7]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[7]?.images[0]}`} alt="" />
 
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[7]?.title}
@@ -547,22 +459,14 @@ const RecentWorks = () => {
         onClick={() => handleImageClick(works[8]?.images[0], works[8]?._id)}
         className={`nine bg-orange-400 relative cursor-pointer ${
           activeIndex >= 9 ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-opacity duration-500`}
-      >
-        <img
-          className="h-full w-full object-cover"
-          src={`${serverUrl}/${works[8]?.images[0]}`}
-          alt=""
-        />
+        } transition-opacity duration-500`}>
+        <img className="h-full w-full object-cover" src={`${serverUrl}/${works[8]?.images[0]}`} alt="" />
         <p className="w-full bg-black/40 absolute textShadow-custom left-1/2 -translate-x-1/2 bottom-0 text-xs text-white font-bold  text-center">
           {works[8]?.title}
         </p>
       </div>
       {showButton && (
-        <button
-          onClick={handleButtonClick}
-          className="absolute top-2 left-2  text-white p-1 border w-[10%]"
-        >
+        <button onClick={handleButtonClick} className="absolute top-2 left-2  text-white p-1 border w-[10%]">
           <img className="w-full" src={clickGif} alt="" />
         </button>
       )}
