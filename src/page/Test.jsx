@@ -17,7 +17,7 @@ const SpecificationItem = ({ title, items, data, sItemClass }) => {
   const procesedData = Array.isArray(data) ? "" : data?.split(",");
   let serverUrl = import.meta.env.VITE_SERVER_URL;
   return (
-    <div className={` ${sItemClass} bg-[#d6cbb4] border  `}>
+    <div className={` ${sItemClass} bg-[#d6cbb4] border grow`}>
       <h2 className="px-1 text-[9px] bg-[#282828] mb-0.5 text-center uppercase font-bold text-[#e3e3e3] py-0.5 ">
         {title}
       </h2>
@@ -147,11 +147,19 @@ const Test = () => {
           <h2 className="bg-orange-600 p-1  uppercase text-gray-200 mt-1 mx-1 rounded text-center text-sm font-bold">
             Technical Perameter
           </h2>
-          <div className="h-[44%] ">
+          <div className="h-[44%] grow">
             <div className="h-[100%] ">
               <div className="w-[100%] h-full   ">
                 <div className="h-[100%] grid grid-cols-4">
-                  <div className="col-span-3 grid grid-cols-3 gap-1 overflow-y-scroll no-scrollbar p-1">
+                  <div
+                    className={`${
+                      specification?.dimming.length > 0 ||
+                      specification?.thickness.length > 0 ||
+                      specification?.cct.length > 0 ||
+                      specification?.shape.length > 0
+                        ? "col-span-3 grid-cols-3"
+                        : "col-span-4 grid-cols-4"
+                    } grid gap-1 overflow-y-scroll no-scrollbar p-1`}>
                     {productsToShow?.map((product) => (
                       <div
                         key={product.id}
@@ -163,7 +171,7 @@ const Test = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="col-span-1  pt-1">
+                  <div className="col-span-1 flex flex-col pt-1">
                     {specification?.dimming.length > 0 || specification?.thickness ? (
                       <SpecificationItem
                         sItemClass="h-1/2 w-full"
@@ -203,8 +211,15 @@ const Test = () => {
             </div>
           </div>
 
-          {specification && (
-            <div className="h-[16%] bg-gray-100 flex justify-end ">
+          {specification?.mounting_array.length > 0 ||
+          specification?.capacity ||
+          specification?.rimColor.length > 0 ||
+          specification?.protocol ||
+          specification?.bodyColor.length > 0 ||
+          specification?.mounting ||
+          specification?.glare.length > 0 ||
+          specification?.finish ? (
+            <div className="h-[16%] bg-gray-100 flex justify-end grow">
               {specification?.mounting_array.length > 0 || specification?.capacity ? (
                 <SpecificationItem
                   sItemClass="h-full w-full"
@@ -220,12 +235,18 @@ const Test = () => {
                 ""
               )}
 
-              <SpecificationItem
-                sItemClass="h-full w-full"
-                title={specification?.rimColor.length > 0 ? "Rim Color" : "Protocol"}
-                data={specification?.rimColor.length > 0 ? specification?.rimColor : specification?.protocol}
-                items={["White", "Black", "Chrome", "Rose Gold", "+"]}
-              />
+              {specification?.rimColor.length > 0 || specification?.protocol ? (
+                <SpecificationItem
+                  sItemClass="h-full w-full"
+                  title={specification?.rimColor.length > 0 ? "Rim Color" : "Protocol"}
+                  data={
+                    specification?.rimColor.length > 0 ? specification?.rimColor : specification?.protocol
+                  }
+                  items={["White", "Black", "Chrome", "Rose Gold", "+"]}
+                />
+              ) : (
+                <></>
+              )}
 
               {specification?.bodyColor.length > 0 || specification?.mounting ? (
                 <SpecificationItem
@@ -250,10 +271,19 @@ const Test = () => {
                 ""
               )}
             </div>
+          ) : (
+            <></>
           )}
-          {specification && (
+
+          {specification?.lumens.length > 0 ||
+          specification?.watts.length > 0 ||
+          specification?.cri.length > 0 ||
+          specification?.dimention.length > 0 ||
+          specification?.beamAngle.length > 0 ||
+          specification?.ip.length > 0 ||
+          specification?.customization.length > 0 ? (
             <div className="h-[16%] bg-gray-100 flex-row-reverse flex justify-end">
-              {specification?.lumens.length > 0 || specification?.watts ? (
+              {specification?.lumens.length > 0 || specification?.watts.length > 0 ? (
                 <div className="w-full h-full bg-[#d6cbb4] flex flex-col justify-between">
                   {specification?.lumens.length > 0 && (
                     <SpecificationItem
@@ -294,14 +324,19 @@ const Test = () => {
                 />
               )}
 
-              <SpecificationItem
-                sItemClass="w-full"
-                title={specification?.ip.length > 0 ? "IP" : "Customization"}
-                data={specification?.ip.length > 0 ? specification?.ip : specification?.customization}
-                items={["20", "40", "65", "66", "67", "68", "+"]}
-              />
+              {specification?.ip.length > 0 || specification?.customization ? (
+                <SpecificationItem
+                  sItemClass="w-full"
+                  title={specification?.ip.length > 0 ? "IP" : "Customization"}
+                  data={specification?.ip.length > 0 ? specification?.ip : specification?.customization}
+                  items={["20", "40", "65", "66", "67", "68", "+"]}
+                />
+              ) : null}
             </div>
+          ) : (
+            <></>
           )}
+
           {specification && (
             <div className="h-[20%] bg-slate-200 p-1">
               <div className="w-full h-[100%] flex justify-between flex-wrap">
